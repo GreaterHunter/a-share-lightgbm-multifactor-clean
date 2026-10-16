@@ -45,6 +45,8 @@
 
 来源：[逐日净值汇总](reports/current_strategy/phase_daily.csv)、[逐起点指标](reports/current_strategy/phase_metrics.csv)及[原实验汇总](reports/experiments/s6_quarterly_l1l2_small_asof_20261013/summary.csv)。平均年化是五条账户各自复合年化的算术平均，不是累计收益除以年数；费用已计入净收益。
 
+当前版本采用**固定年化无风险利率1%**计算夏普，五起点平均年化夏普为 **1.000**；相对沪深300的平均年化信息比率为 **1.503**。两者分别按各账户成本后日收益计算后取平均，公式见[主报告](reports/current_strategy/README.md)。
+
 ### 五起点净值与最大回撤
 
 展示全部五个预设调仓起点，与同区间沪深300比较；每条曲线都是独立回放账户。回撤包含初始现金高点，红色虚线为原30%研究筛选线。

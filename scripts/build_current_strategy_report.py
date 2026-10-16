@@ -20,6 +20,7 @@ SUMMARY = ROOT / "reports/experiments/s6_quarterly_l1l2_small_asof_20261013/summ
 OFFSETS = tuple(range(5))
 START, END = "2022-01-04", "2026-10-13"
 INITIAL_CASH = 1_000_000
+ANNUAL_RISK_FREE_RATE = 0.01
 COLUMNS = ["offset", "datetime", "net_return", "benchmark_return", "portfolio_nav",
            "benchmark_nav", "fees_cny", "turnover", "holdings_count"]
 
@@ -39,6 +40,21 @@ def drawdown(nav):
     return values / peak - 1.0
 
 
+def risk_adjusted_metrics(net_return, benchmark_return, annual_risk_free_rate=ANNUAL_RISK_FREE_RATE):
+    """Use a fixed effective annual cash benchmark; IR remains index-relative."""
+    if not np.isfinite(annual_risk_free_rate) or annual_risk_free_rate <= -1:
+        raise ValueError("Invalid annual risk-free rate")
+    daily_risk_free = np.expm1(np.log1p(annual_risk_free_rate) / 252)
+    excess = net_return - daily_risk_free
+    active = net_return - benchmark_return
+    excess_std, active_std = excess.std(ddof=1), active.std(ddof=1)
+    return dict(risk_free_rate_annual=float(annual_risk_free_rate),
+        sharpe=float(excess.mean()/excess_std*np.sqrt(252)) if excess_std>0 else float("nan"),
+        information_ratio=float(active.mean()/active_std*np.sqrt(252)) if active_std>0 else float("nan"),
+        annualized_volatility=float(net_return.std(ddof=1)*np.sqrt(252)),
+        annualized_tracking_error=float(active_std*np.sqrt(252)))
+
+
 def period_stats(part):
     wealth = (1 + part.net_return).cumprod()
     benchmark = (1 + part.benchmark_return).prod()
@@ -47,7 +63,8 @@ def period_stats(part):
         benchmark_return=float(benchmark - 1),
         geometric_excess=float(wealth.iloc[-1] / benchmark - 1),
         max_drawdown=float(-drawdown(wealth).min()), fees_cny=float(part.fees_cny.sum()),
-        daily_turnover=float(part.turnover.mean()), average_holdings=float(part.holdings_count.mean()))
+        daily_turnover=float(part.turnover.mean()), average_holdings=float(part.holdings_count.mean()),
+        **risk_adjusted_metrics(part.net_return,part.benchmark_return))
 
 
 def calculate_tables(daily):
@@ -67,7 +84,13 @@ def calculate_tables(daily):
             phase_cagr_std=part.annualized_return.std(ddof=0),
             worst_drawdown=part.max_drawdown.max(), benchmark_return=part.benchmark_return.iloc[0],
             mean_excess=part.geometric_excess.mean(), mean_fees_cny=part.fees_cny.mean(),
-            mean_daily_turnover=part.daily_turnover.mean(), mean_holdings=part.average_holdings.mean()))
+            mean_daily_turnover=part.daily_turnover.mean(), mean_holdings=part.average_holdings.mean(),
+            risk_free_rate_annual=ANNUAL_RISK_FREE_RATE, mean_sharpe=part.sharpe.mean(),
+            min_sharpe=part.sharpe.min(), max_sharpe=part.sharpe.max(),
+            mean_information_ratio=part.information_ratio.mean(),
+            min_information_ratio=part.information_ratio.min(), max_information_ratio=part.information_ratio.max(),
+            mean_annualized_volatility=part.annualized_volatility.mean(),
+            mean_annualized_tracking_error=part.annualized_tracking_error.mean()))
     return phases, pd.DataFrame(aggregates)
 
 
@@ -248,8 +271,8 @@ def make_report(phases, aggregates, versions):
     full=aggregates.loc[aggregates.period.eq("all")].iloc[0]
     years=aggregates.loc[aggregates.period.ne("all")].sort_values("period")
     phase_rows=phases.loc[phases.period.eq("all")].sort_values("offset")
-    phase_table=table(["调仓起点偏移", "累计净收益", "复合年化", "最大回撤", "累计费用"],
-        [[int(r.offset),f"{r.total_return:.2%}",f"{r.annualized_return:.2%}",f"{r.max_drawdown:.2%}",f"{r.fees_cny:,.0f}元"] for r in phase_rows.itertuples()])
+    phase_table=table(["起点偏移", "累计净收益", "复合年化", "最大回撤", "夏普", "信息比率", "累计费用"],
+        [[int(r.offset),f"{r.total_return:.2%}",f"{r.annualized_return:.2%}",f"{r.max_drawdown:.2%}",f"{r.sharpe:.3f}",f"{r.information_ratio:.3f}",f"{r.fees_cny:,.0f}元"] for r in phase_rows.itertuples()])
     yearly_table=table(["年份", "策略平均收益", "起点最小至最大收益", "沪深300收益", "平均几何超额", "年内最差回撤"],
         [[r.period if r.period!="2026" else "2026截至10月13日",f"{r.mean_return:.2%}",f"{r.min_return:.2%} 至 {r.max_return:.2%}",f"{r.benchmark_return:.2%}",f"{r.mean_excess:.2%}",f"{r.worst_drawdown:.2%}"] for r in years.itertuples()])
     version_table=table(["训练版本", "平均复合年化", "五起点最差回撤", "平均累计费用"],
@@ -294,6 +317,17 @@ S6是组合和模型线的名称，不同重训与约束版本的结果不同。
 五起点平均累计净收益为{full.mean_return:.2%}，平均累计费用{full.mean_fees_cny:,.0f}元，日均双边成交额换手{full.mean_daily_turnover:.2%}，平均持仓{full.mean_holdings:.2f}只。同区间基准累计收益{full.benchmark_return:.2%}。
 
 平均年化是每条账户 `(期末净值/初始净值)^(252/交易日数)-1` 的算术平均。不能把累计收益除以年数，也不能将五条净值平均后当作真实账户。最大回撤为各账户相对此前高点的最大跌幅，最差值取五起点中的最大者。
+
+## 夏普和信息比率
+
+本报告将固定年化无风险利率设为 **{ANNUAL_RISK_FREE_RATE:.0%}**，作为研究中的机会成本假设，不代表某家银行的历史报价。按有效年利率折算日利率 `rf_daily=(1+0.01)^(1/252)-1`，约为0.00394862%。
+
+- 夏普：`mean(日净收益-rf_daily) / std(日净收益-rf_daily, ddof=1) * sqrt(252)`。
+- 信息比率：`mean(日净收益-沪深300日收益) / std(日净收益-沪深300日收益, ddof=1) * sqrt(252)`。
+
+五起点分别计算后，平均年化夏普为 **{full.mean_sharpe:.3f}**，范围{full.min_sharpe:.3f}至{full.max_sharpe:.3f}；平均年化信息比率为 **{full.mean_information_ratio:.3f}**，范围{full.min_information_ratio:.3f}至{full.max_information_ratio:.3f}。两项指标均使用成本后日收益和252交易日年化。
+
+1%的基准只用于夏普计算，不会给研究账户的闲置现金增加利息，净值、年化收益和最大回撤保持原回放结果。信息比率相对沪深300计算，不扣除该无风险基准。历史冻结实验中的零无风险利率口径仍保留供追溯，当前报告以上述1%口径为准。
 
 ## 分年度收益
 

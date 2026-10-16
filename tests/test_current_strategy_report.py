@@ -31,6 +31,21 @@ def test_public_daily_reproduces_every_audited_period():
     full=summary.loc[summary.period.eq("all")].iloc[0]
     assert np.isclose(full.mean_cagr,.18846122974183205)
     assert np.isclose(full.worst_drawdown,.3034725047592275)
+    assert np.isclose(full.mean_sharpe,1.0001958154384787)
+    assert np.isclose(full.mean_information_ratio,1.5030796428206568)
+
+
+def test_effective_risk_free_adjustment_leaves_index_relative_ir_unchanged():
+    net=pd.Series([.001,-.002,.003,.0005,-.001])
+    benchmark=pd.Series([.0001,-.001,.002,-.0005,.0002])
+    zero=report.risk_adjusted_metrics(net,benchmark,0.)
+    one=report.risk_adjusted_metrics(net,benchmark,.01)
+    daily=np.expm1(np.log1p(.01)/252)
+    assert np.isclose((1+daily)**252,1.01)
+    expected=(net-daily).mean()/(net-daily).std(ddof=1)*np.sqrt(252)
+    assert np.isclose(one['sharpe'],expected)
+    assert one['sharpe']<zero['sharpe']
+    assert one['information_ratio']==zero['information_ratio']
 
 
 def test_public_evidence_excludes_stock_and_broker_records():
