@@ -1,0 +1,48 @@
+# Python环境与缓存
+.venv/
+__pycache__/
+.pytest_cache/
+*.py[cod]
+
+# IDE配置
+.idea/
+.vscode/
+
+# 密钥和本机配置
+.env
+
+# 不上传真实数据，只保留目录结构
+data/raw/*
+!data/raw/.gitkeep
+data/interim/*
+!data/interim/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+data/external/*
+!data/external/.gitkeep
+data/qlib/*
+!data/qlib/.gitkeep
+
+# 不上传训练模型和大型回测明细
+models/*
+!models/.gitkeep
+reports/**/*.parquet
+reports/**/*.pkl
+*.log
+
+# Local experiment recorder storage; summaries and source remain reviewable.
+reports/experiments/final_ablation_asof_*/mlruns/
+
+# Private workstation deployment and broker records (never publish account state).
+configs/futu_cn_paper.json
+configs/experiments/s6_head6_40_research_main.json
+reports/paper_futu/
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Generated research caches, account ledgers, process state and large artifacts.
+# Selected small, reviewed research summaries are added explicitly with git add -f.
+reports/experiments/*/**
+reports/diagnostics/*/**

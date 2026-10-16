@@ -1,0 +1,4 @@
+﻿test_year,chosen_iteration,final_train_start,final_train_end,final_train_rows,test_rows,validation_fold_count,selection_mean_validation_rank_ic
+2022,640,2010-01-01,2021-12-31,834563,69488,3,0.04071670777211649
+2023,320,2010-01-01,2022-12-31,907049,69588,3,0.055720262462934995
+2024,40,2010-01-01,2023-12-31,979637,69451,3,0.057189883477679566

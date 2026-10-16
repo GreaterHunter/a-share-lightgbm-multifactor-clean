@@ -1,0 +1,6 @@
+# Same training and trading schedule; scale the original 20%/80% tier sizes to 10 holdings.
+top_k: 10
+top_tier_size: 2
+top_tier_weight: 0.40
+# Keep the original absolute replacement limit, rather than change it to 1 or 10.
+n_drop: 5

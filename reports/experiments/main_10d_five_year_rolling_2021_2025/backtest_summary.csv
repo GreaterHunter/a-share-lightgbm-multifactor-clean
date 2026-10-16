@@ -1,0 +1,2 @@
+﻿model,trading_days,total_return,annualized_return,benchmark_total_return,benchmark_annualized_return,total_excess_return,annualized_excess_return,sharpe,information_ratio,max_drawdown,average_daily_turnover,total_cost_rate_sum,positive_active_day_ratio
+ranked_enhanced_10d_rebalance_10d_five_year_window,1211,-0.0010298911499828645,-0.00021440005742745516,-0.1210735218180059,-0.026497779594299664,0.1365798319289755,0.02699878745619988,0.08271877659702895,0.27261427981216163,-0.4202050348332711,0.04302608582828765,0.05228440335689578,0.5425268373245252

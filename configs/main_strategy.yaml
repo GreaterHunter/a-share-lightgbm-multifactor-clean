@@ -1,0 +1,33 @@
+strategy_name: ranked_enhanced_open_10d_walk_forward_cv
+model_variant: ranked_enhanced
+training_mode: annual_expanding_time_series_cv
+
+# 每个验证折从2010年开始使用全部历史数据，随后1年验证。
+# 在各折上比较固定候选树数，按跨折平均Rank IC选择最终树数。
+validation_folds: 3
+iteration_candidates: [10, 20, 40, 80, 160, 320, 640]
+iteration_selection_metric: mean_rank_ic
+test_start_year: 2022
+test_end_year: 2024
+test_end: "2024-12-31"
+
+# T日收盘生成信号；T+1开盘买入，T+11开盘作为10日收益终点。
+label_price_basis: open_to_open
+execution_price_basis: next_session_open
+label_horizon: 10
+rebalance_every: 10
+
+# Top50分层持仓：前10名合计40%，第11-50名合计60%。
+top_k: 50
+n_drop: 5
+top_tier_size: 10
+top_tier_weight: 0.40
+
+# T+1开盘执行；仅对实际成交的仓位变化收取成本。
+buy_cost: 0.0005
+sell_cost: 0.0015
+minimum_cost: 5.0
+initial_cash: 10000000
+risk_degree: 0.95
+limit_threshold: 0.095
+trade_unit: 100

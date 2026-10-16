@@ -1,0 +1,197 @@
+{
+  "as_of": "2026-10-13",
+  "max_report_date": "2026-06-30",
+  "max_disclosure_date": "2026-08-31",
+  "max_available_date": "2026-09-01",
+  "reports_2026": [
+    {
+      "report_date": "2026-03-31",
+      "stocks": 752,
+      "first_available": "2026-04-09",
+      "last_available": "2026-05-16"
+    },
+    {
+      "report_date": "2026-06-30",
+      "stocks": 752,
+      "first_available": "2026-07-24",
+      "last_available": "2026-09-01"
+    }
+  ],
+  "coverage": [
+    {
+      "day": "2025-12-31",
+      "pool_stocks": 300,
+      "aligned_rows": 300,
+      "general_reports": {
+        "2025-09-30 00:00:00": 300
+      },
+      "annual_eps_reports": {
+        "2024-12-31 00:00:00": 299,
+        "NaT": 1
+      },
+      "missing_general_stocks": [],
+      "missing_from_event_universe": [],
+      "missing_factors": {
+        "book_to_price": 2,
+        "earnings_to_price": 3,
+        "operating_cashflow_to_revenue": 0
+      }
+    },
+    {
+      "day": "2026-03-31",
+      "pool_stocks": 300,
+      "aligned_rows": 300,
+      "general_reports": {
+        "2025-09-30 00:00:00": 190,
+        "2025-12-31 00:00:00": 110
+      },
+      "annual_eps_reports": {
+        "2024-12-31 00:00:00": 189,
+        "2025-12-31 00:00:00": 110,
+        "NaT": 1
+      },
+      "missing_general_stocks": [],
+      "missing_from_event_universe": [],
+      "missing_factors": {
+        "book_to_price": 0,
+        "earnings_to_price": 1,
+        "operating_cashflow_to_revenue": 0
+      }
+    },
+    {
+      "day": "2026-06-30",
+      "pool_stocks": 300,
+      "aligned_rows": 300,
+      "general_reports": {
+        "2026-03-31 00:00:00": 290,
+        "NaT": 10
+      },
+      "annual_eps_reports": {
+        "2025-12-31 00:00:00": 290,
+        "NaT": 10
+      },
+      "missing_general_stocks": [
+        "SH688072",
+        "SH688183",
+        "SH688521",
+        "SZ000657",
+        "SZ000988",
+        "SZ001280",
+        "SZ002532",
+        "SZ002837",
+        "SZ301165",
+        "SZ301308"
+      ],
+      "missing_from_event_universe": [
+        "SH688072",
+        "SH688183",
+        "SH688521",
+        "SZ000657",
+        "SZ000988",
+        "SZ001280",
+        "SZ002532",
+        "SZ002837",
+        "SZ301165",
+        "SZ301308"
+      ],
+      "missing_factors": {
+        "book_to_price": 10,
+        "earnings_to_price": 10,
+        "operating_cashflow_to_revenue": 10
+      }
+    },
+    {
+      "day": "2026-09-30",
+      "pool_stocks": 300,
+      "aligned_rows": 300,
+      "general_reports": {
+        "2026-06-30 00:00:00": 290,
+        "NaT": 10
+      },
+      "annual_eps_reports": {
+        "2025-12-31 00:00:00": 290,
+        "NaT": 10
+      },
+      "missing_general_stocks": [
+        "SH688072",
+        "SH688183",
+        "SH688521",
+        "SZ000657",
+        "SZ000988",
+        "SZ001280",
+        "SZ002532",
+        "SZ002837",
+        "SZ301165",
+        "SZ301308"
+      ],
+      "missing_from_event_universe": [
+        "SH688072",
+        "SH688183",
+        "SH688521",
+        "SZ000657",
+        "SZ000988",
+        "SZ001280",
+        "SZ002532",
+        "SZ002837",
+        "SZ301165",
+        "SZ301308"
+      ],
+      "missing_factors": {
+        "book_to_price": 11,
+        "earnings_to_price": 11,
+        "operating_cashflow_to_revenue": 10
+      }
+    },
+    {
+      "day": "2026-10-13",
+      "pool_stocks": 300,
+      "aligned_rows": 300,
+      "general_reports": {
+        "2026-06-30 00:00:00": 290,
+        "NaT": 10
+      },
+      "annual_eps_reports": {
+        "2025-12-31 00:00:00": 290,
+        "NaT": 10
+      },
+      "missing_general_stocks": [
+        "SH688072",
+        "SH688183",
+        "SH688521",
+        "SZ000657",
+        "SZ000988",
+        "SZ001280",
+        "SZ002532",
+        "SZ002837",
+        "SZ301165",
+        "SZ301308"
+      ],
+      "missing_from_event_universe": [
+        "SH688072",
+        "SH688183",
+        "SH688521",
+        "SZ000657",
+        "SZ000988",
+        "SZ001280",
+        "SZ002532",
+        "SZ002837",
+        "SZ301165",
+        "SZ301308"
+      ],
+      "missing_factors": {
+        "book_to_price": 11,
+        "earnings_to_price": 11,
+        "operating_cashflow_to_revenue": 10
+      }
+    }
+  ],
+  "annual_eps_definition": "Latest disclosed full-year basic EPS, not quarterly EPS or TTM EPS",
+  "financial_revision_archive_complete": false,
+  "data_updated_for_experiment": false,
+  "source_sha256": {
+    "data/processed/final_ablation_asof_20261013/financial_events.parquet": "008cd06629fbdcdd4c5b79912b345c689d7ad26d85708e98088917e2f5532fc5",
+    "data/processed/final_ablation_asof_20261013/financial_alignment.parquet": "cd9ba04649141f7547aeb791bf73fa5e6b7bc27f06c82f4536ded51acb5fb258",
+    "data/processed/final_ablation_asof_20261013/raw_features.parquet": "0995aead990fbddaab7c537b0315270d189c98d961c813e536cf63a3450316c2"
+  },
+  "publication_note": "Derived public copy: absolute source paths replaced by repository-relative paths; statistics and source content hashes unchanged. Not the original hash-bound report."
+}

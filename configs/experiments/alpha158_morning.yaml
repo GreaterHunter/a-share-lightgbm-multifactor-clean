@@ -1,0 +1,20 @@
+# Independent research version. Never replaces the confirmed paper plans.
+factor_set: Alpha158
+alpha158_count: 158
+retain_fundamental_count: 3
+morning_feature: morning_open_gap
+morning_observation: confirmed_opening_auction_after_09_25
+execution_not_before: "09:31"
+label_horizon: 10
+label_price_basis: observed_auction_open_to_future_open_proxy
+label_expression: "Ref($open, -10) / $open - 1"
+signal_index: observation_session_S
+training_start: "2010-01-01"
+validation_years: [2023, 2024, 2025]
+iteration_candidates: [10, 20, 40, 80, 160, 320, 640]
+random_state: 42
+training_threads: 4
+portfolio: {top_k: 10, n_drop: 3, rebalance_every: 10, top_tier_size: 2, top_tier_weight: 0.4, risk_degree: 0.95}
+deployment: offline_only
+daily_open_fill_backtest_allowed: false
+training_min_available_memory_gib: 4.0

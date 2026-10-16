@@ -1,0 +1,33 @@
+provider_uri: data/qlib/qlib_bin
+region: cn
+
+universe: csi300
+benchmark: SH000300
+
+start_date: "2024-07-01"
+end_date: "2024-07-31"
+
+factor_window: 20
+label_horizon: 5
+
+train_start: "2010-01-01"
+train_end: "2020-12-31"
+
+valid_start: "2021-01-01"
+valid_end: "2021-12-31"
+
+test_start: "2022-01-01"
+test_end: "2024-12-31"
+
+min_cross_section_size: 30
+
+top_k: 50
+n_drop: 5
+rebalance_every: 5
+
+buy_cost: 0.0005
+sell_cost: 0.0015
+minimum_cost: 5.0
+initial_cash: 10000000
+risk_degree: 0.95
+limit_threshold: 0.095

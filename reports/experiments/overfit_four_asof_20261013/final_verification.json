@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "verified_at": 1792077367.1729965,
+  "elapsed_seconds": 52.64541411399841,
+  "job_counts": {
+    "fold": 136,
+    "fit": 140,
+    "account": 340,
+    "signal_diagnostic": 30,
+    "account_diagnostic": 340
+  },
+  "final_models_reloaded": 140,
+  "sampled_predictions_per_model": 128,
+  "accounts_reconciled": 340,
+  "streams_verified": 30,
+  "paired_interval_rows": 96,
+  "task_and_artifact_hashes": true,
+  "mature_training_and_validation_boundaries": true,
+  "account_nav_cash_fees_and_shared_benchmark": true,
+  "snapshot_and_protected_state": true,
+  "scientific_implementation_sha256": "fb3c53eaedaea0191e645f788756c64bb8306fdad0d6829a3cfdad6aa8845f04",
+  "runtime_scheduler_sha256": "221aacd379b8abfeb49103b2c11a3cd09656ffdb1c92397f59e1a13534d065a8",
+  "original_report_manifest_sha256": "bd015880b2f648a2e46f6a2dc22bf6e21b6fd60e48ec2726d5e3efa9a15b5ec7"
+}

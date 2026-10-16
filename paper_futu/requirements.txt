@@ -1,0 +1,3 @@
+futu-api==10.11.7108
+simplejson==3.20.2
+pycryptodome==3.24.0

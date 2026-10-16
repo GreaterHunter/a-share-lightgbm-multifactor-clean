@@ -1,0 +1,3 @@
+﻿experiment,fold,model,target,best_iteration,train_start,train_end,valid_start,valid_end,test_start,test_end,train_rows,valid_rows,refit_rows,test_rows,valid_mse,valid_mean_ic,valid_mean_rank_ic,valid_positive_rank_ic_ratio
+locked_2025_validation,test_2025,ranked_enhanced_10d,target_rank_10d,221,2013-01-01,2023-12-31,2024-01-01,2024-12-31,2025-01-01,2025-12-31,772173,69451,844624,72446,0.08245239078347948,0.0828697609253677,0.09374751256389915,0.6939655172413793
+locked_2025_validation,test_2025,ranked_enhanced_15d,target_rank_15d,288,2013-01-01,2023-12-31,2024-01-01,2024-12-31,2025-01-01,2025-12-31,768751,67921,841172,72391,0.08230842760192937,0.09347607953052188,0.09871313399115308,0.7092511013215859

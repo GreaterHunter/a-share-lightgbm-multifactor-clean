@@ -1,0 +1,122 @@
+{
+  "status": "passed",
+  "verified": 1792086134.456592,
+  "account_count": 55,
+  "new_accounts": 50,
+  "reused_accounts": 5,
+  "new_fits": 15,
+  "boundaries": [
+    {
+      "cutoff": "2022-03-31",
+      "train_signal_end": "2022-03-16",
+      "label_end_max": "2022-03-31",
+      "trees": 640,
+      "rows": 855487
+    },
+    {
+      "cutoff": "2022-06-30",
+      "train_signal_end": "2022-06-15",
+      "label_end_max": "2022-06-30",
+      "trees": 640,
+      "rows": 873158
+    },
+    {
+      "cutoff": "2022-09-30",
+      "train_signal_end": "2022-09-15",
+      "label_end_max": "2022-09-30",
+      "trees": 640,
+      "rows": 892624
+    },
+    {
+      "cutoff": "2023-03-31",
+      "train_signal_end": "2023-03-16",
+      "label_end_max": "2023-03-31",
+      "trees": 160,
+      "rows": 928302
+    },
+    {
+      "cutoff": "2023-06-30",
+      "train_signal_end": "2023-06-13",
+      "label_end_max": "2023-06-30",
+      "trees": 160,
+      "rows": 945998
+    },
+    {
+      "cutoff": "2023-09-28",
+      "train_signal_end": "2023-09-13",
+      "label_end_max": "2023-09-28",
+      "trees": 160,
+      "rows": 965194
+    },
+    {
+      "cutoff": "2024-03-29",
+      "train_signal_end": "2024-03-14",
+      "label_end_max": "2024-03-29",
+      "trees": 40,
+      "rows": 1000589
+    },
+    {
+      "cutoff": "2024-06-28",
+      "train_signal_end": "2024-06-13",
+      "label_end_max": "2024-06-28",
+      "trees": 40,
+      "rows": 1018284
+    },
+    {
+      "cutoff": "2024-09-30",
+      "train_signal_end": "2024-09-11",
+      "label_end_max": "2024-09-30",
+      "trees": 40,
+      "rows": 1037378
+    },
+    {
+      "cutoff": "2025-03-31",
+      "train_signal_end": "2025-03-14",
+      "label_end_max": "2025-03-31",
+      "trees": 80,
+      "rows": 1072641
+    },
+    {
+      "cutoff": "2025-06-30",
+      "train_signal_end": "2025-06-13",
+      "label_end_max": "2025-06-30",
+      "trees": 80,
+      "rows": 1090526
+    },
+    {
+      "cutoff": "2025-09-30",
+      "train_signal_end": "2025-09-15",
+      "label_end_max": "2025-09-30",
+      "trees": 80,
+      "rows": 1110241
+    },
+    {
+      "cutoff": "2026-03-31",
+      "train_signal_end": "2026-03-16",
+      "label_end_max": "2026-03-31",
+      "trees": 40,
+      "rows": 1144841
+    },
+    {
+      "cutoff": "2026-06-30",
+      "train_signal_end": "2026-06-12",
+      "label_end_max": "2026-06-30",
+      "trees": 40,
+      "rows": 1162821
+    },
+    {
+      "cutoff": "2026-09-30",
+      "train_signal_end": "2026-09-14",
+      "label_end_max": "2026-09-30",
+      "trees": 40,
+      "rows": 1182283
+    }
+  ],
+  "exact_training_fingerprints": true,
+  "all_account_hashes_and_accounting": true,
+  "independent_drawdown_includes_initial_nav": true,
+  "unchanged_rebalance_schedule": true,
+  "research_main_config_equal": true,
+  "protected_state_unchanged": true,
+  "implementation_sha256": "8a77d2341e8632522ae8c02d454455c7f031bf10f590e9fec1c21ce8648cd5da"
+}

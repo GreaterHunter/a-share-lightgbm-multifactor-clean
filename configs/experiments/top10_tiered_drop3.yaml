@@ -1,0 +1,5 @@
+# Same Top10 40/60 tiered strategy; change only the replacement limit.
+top_k: 10
+top_tier_size: 2
+top_tier_weight: 0.40
+n_drop: 3

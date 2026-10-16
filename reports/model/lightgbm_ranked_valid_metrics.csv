@@ -1,0 +1,2 @@
+﻿model,target_name,observations,valid_days,model_mse,mean_ic,std_ic,icir_non_annualized,positive_ic_ratio,mean_rank_ic,std_rank_ic,rank_icir_non_annualized,positive_rank_ic_ratio
+lightgbm_ranked,target_rank_5d,71264,238,0.08321050455205199,0.021311275927963443,0.12608845543630942,0.16901845497447882,0.5336134453781513,0.03623136626945634,0.11971954920702246,0.3026353382504308,0.634453781512605

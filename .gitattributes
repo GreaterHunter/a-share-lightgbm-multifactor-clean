@@ -1,0 +1,12 @@
+# Frozen experiment hashes cover exact bytes, including original line endings.
+# Keep these sources byte-identical on every checkout instead of normalizing them.
+paper_futu/final_ablation_account.py -text
+paper_futu/final_ablation_core.py -text
+paper_futu/final_ablation_data.py -text
+paper_futu/final_ablation_training.py -text
+paper_futu/run_final_ablation.py -text
+src/factor_library.py -text
+src/build_enhanced_dataset.py -text
+src/compare_models.py -text
+src/portfolio_strategy.py -text
+src/runtime_budget.py -text

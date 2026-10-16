@@ -1,0 +1,13 @@
+source: akshare_tencent
+
+start_date: "2024-07-01"
+end_date: "2024-12-31"
+
+frequency: daily
+adjust: qfq
+
+symbols:
+  - sh600000
+  - sz000001
+
+benchmark: sh000300

@@ -1,0 +1,12 @@
+akshare==1.18.95
+lightgbm==4.6.0
+numpy==1.26.4
+pandas==2.2.3
+pyarrow==17.0.0
+pyqlib==0.9.7
+PyYAML==6.0.3
+scikit-learn==1.5.2
+pytest>=8.0,<9.0
+psutil==7.2.2
+scipy==1.13.1
+matplotlib==3.9.2

@@ -1,0 +1,22 @@
+model_name: lightgbm_baseline
+
+parameters:
+  objective: regression
+  metric: l2
+  boosting_type: gbdt
+  learning_rate: 0.03
+  n_estimators: 2000
+  num_leaves: 31
+  max_depth: -1
+  min_child_samples: 100
+  subsample: 0.8
+  subsample_freq: 1
+  colsample_bytree: 0.8
+  reg_alpha: 0.1
+  reg_lambda: 1.0
+  random_state: 42
+  verbosity: -1
+
+training:
+  early_stopping_rounds: 100
+  log_evaluation_period: 50

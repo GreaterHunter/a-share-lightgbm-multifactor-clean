@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "verified": 1792087267.194175,
+  "new_fits": 20,
+  "new_accounts": 10,
+  "all_quarter_boundaries_valid": true,
+  "model_reload": true,
+  "accounting_and_drawdowns": true,
+  "exact_parent_execution_adapter": true,
+  "financial_coverage_matches_snapshot": true,
+  "parent_and_futu_unchanged": true,
+  "implementation_sha256": "c457ccc7f671be1751f74cde751db9fbeebbf9df0fe33bf893ab0b8bd395edf6"
+}
