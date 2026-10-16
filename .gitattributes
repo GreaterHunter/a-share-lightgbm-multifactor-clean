@@ -13,3 +13,9 @@ src/runtime_budget.py -text
 
 # Public evidence hashes use canonical LF bytes on every platform.
 reports/current_strategy/*.csv text eol=lf
+
+# Attribution manifests bind these files by exact bytes, including Markdown.
+# Preserve their existing bytes on Windows and Linux; do not rewrite hashes.
+reports/current_strategy/total_return/* -text whitespace=cr-at-eol
+paper_futu/benchmark_attribution.py -text whitespace=cr-at-eol,-blank-at-eof
+paper_futu/prospective_s6.py -text whitespace=cr-at-eol,-blank-at-eof

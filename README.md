@@ -1,5 +1,7 @@
 # A股多因子 LightGBM 研究与模拟交易
 
+[![Offline tests](https://github.com/GreaterHunter/a-share-lightgbm-multifactor-clean/actions/workflows/tests.yml/badge.svg)](https://github.com/GreaterHunter/a-share-lightgbm-multifactor-clean/actions/workflows/tests.yml)
+
 基于动态沪深300股票池的中低频横截面选股项目：从点时数据、成熟标签、多折验证，到账户式回测、过拟合诊断和富途模拟盘衔接。
 
 **当前研究主版本：S6季度重训＋L1/L2增强＋低复杂度树。** 项目用于研究与工程实践，不是开箱即用的实盘交易系统，不构成投资建议。
@@ -45,7 +47,11 @@
 
 来源：[逐日净值汇总](reports/current_strategy/phase_daily.csv)、[逐起点指标](reports/current_strategy/phase_metrics.csv)及[原实验汇总](reports/experiments/s6_quarterly_l1l2_small_asof_20261013/summary.csv)。平均年化是五条账户各自复合年化的算术平均，不是累计收益除以年数；费用已计入净收益。
 
-当前版本采用**固定年化无风险利率1%**计算夏普，五起点平均年化夏普为 **1.000**；相对沪深300的平均年化信息比率为 **1.503**。两者分别按各账户成本后日收益计算后取平均，公式见[主报告](reports/current_strategy/README.md)。
+当前版本采用**固定年化无风险利率1%**计算夏普，五起点平均年化夏普为 **1.000**。主评价基准已补齐为**沪深300全收益指数H00300**：平均年化信息比率 **1.303**，年化几何超额 **19.45%**；旧价格指数口径IR为1.503。改变基准不改变策略净值，详见[全收益归因](reports/current_strategy/total_return/README.md)。
+
+![S6价格与全收益基准归因](reports/current_strategy/total_return/benchmark_attribution.png)
+
+历史筛选到此停止，后续按冻结规则做前瞻记录；观察器不连接券商、不发单，见[前瞻验证流程](docs/prospective_s6.md)。
 
 ### 五起点净值与最大回撤
 
@@ -121,6 +127,8 @@ data/ models/  本地数据与模型，不随仓库分发
 当前没有自动季度重训任务；新的服务季度需要重新训练并验证模型。模拟程序依赖本机Windows任务与已登录OpenD，不依赖Codex保持打开。请勿为运行示例而安装交易调度或绕过账户校验。
 
 贡献与变更约定见 [CONTRIBUTING.md](CONTRIBUTING.md)，敏感信息处理见 [SECURITY.md](SECURITY.md)，新仓库的导出与检查范围见[发布审计](docs/publication_audit.md)。
+
+本仓库仅作公开展示，暂不添加项目许可证。第三方依赖仍遵循各自许可；公开副本不包含原开发仓库的旧历史或任何可用的交易账户配置。
 
 ## 参考项目
 

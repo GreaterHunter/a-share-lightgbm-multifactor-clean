@@ -2,6 +2,8 @@
 from pathlib import Path
 import json
 import re
+import csv
+import hashlib
 from urllib.parse import unquote
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -10,6 +12,7 @@ PAGES = ["README.md", "CONTRIBUTING.md", "SECURITY.md",
          "docs/data_contract.md", "docs/results.md", "docs/publication_audit.md",
          "docs/research_report.md", "docs/history/annual_top50_report.md",
          "reports/current_strategy/README.md", "reports/main_strategy/README.md",
+         "reports/current_strategy/total_return/README.md", "docs/prospective_s6.md",
          "paper_futu/README.md", "paper_futu/CSI300_PAPER.md", "paper_futu/S6_CURRENT_DEPLOYMENT.md"]
 
 
@@ -46,3 +49,22 @@ def test_public_financial_evidence_is_marked_as_derived():
     assert "Derived public copy" in config["publication_note"]
     assert all(path.startswith("data/") for path in config["source_sha256"])
     assert all(re.fullmatch(r"[0-9a-f]{64}", digest) for digest in config["source_sha256"].values())
+
+
+def test_total_return_public_evidence_is_portable_and_sanitized():
+    report = ROOT / "reports/current_strategy/total_return"
+    manifest = json.loads((report / "manifest.json").read_text(encoding="utf-8"))
+    assert manifest["status"] == "complete"
+    daily = ROOT / "reports/current_strategy/phase_daily.csv"
+    assert hashlib.sha256(daily.read_bytes()).hexdigest() == manifest["account_daily_sha256"]
+    assert not re.search(r"(?<![A-Za-z0-9])[A-Za-z]:[\\/]", json.dumps(manifest))
+    private_columns = {"account_id", "acc_id", "account_suffix", "instrument", "order_id", "model_path"}
+    for name, expected in manifest["artifacts"].items():
+        assert Path(name).name == name
+        path = report / name
+        assert hashlib.sha256(path.read_bytes()).hexdigest() == expected
+        if path.suffix == ".csv":
+            with path.open(encoding="utf-8-sig", newline="") as handle:
+                assert not private_columns.intersection(next(csv.reader(handle)))
+    attributes = (ROOT / ".gitattributes").read_text(encoding="utf-8")
+    assert "reports/current_strategy/total_return/* -text" in attributes

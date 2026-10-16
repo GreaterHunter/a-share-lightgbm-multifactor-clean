@@ -271,15 +271,35 @@ def make_report(phases, aggregates, versions):
     full=aggregates.loc[aggregates.period.eq("all")].iloc[0]
     years=aggregates.loc[aggregates.period.ne("all")].sort_values("period")
     phase_rows=phases.loc[phases.period.eq("all")].sort_values("offset")
-    phase_table=table(["起点偏移", "累计净收益", "复合年化", "最大回撤", "夏普", "信息比率", "累计费用"],
+    phase_table=table(["起点偏移", "累计净收益", "复合年化", "最大回撤", "夏普", "价格基准IR", "累计费用"],
         [[int(r.offset),f"{r.total_return:.2%}",f"{r.annualized_return:.2%}",f"{r.max_drawdown:.2%}",f"{r.sharpe:.3f}",f"{r.information_ratio:.3f}",f"{r.fees_cny:,.0f}元"] for r in phase_rows.itertuples()])
-    yearly_table=table(["年份", "策略平均收益", "起点最小至最大收益", "沪深300收益", "平均几何超额", "年内最差回撤"],
+    yearly_table=table(["年份", "策略平均收益", "起点最小至最大收益", "价格指数收益", "价格基准几何超额", "年内最差回撤"],
         [[r.period if r.period!="2026" else "2026截至10月13日",f"{r.mean_return:.2%}",f"{r.min_return:.2%} 至 {r.max_return:.2%}",f"{r.benchmark_return:.2%}",f"{r.mean_excess:.2%}",f"{r.worst_drawdown:.2%}"] for r in years.itertuples()])
     version_table=table(["训练版本", "平均复合年化", "五起点最差回撤", "平均累计费用"],
         [[r.variant,f"{r.mean_cagr:.2%}",f"{r.worst_drawdown:.2%}",f"{r.mean_fees_cny:,.0f}元"] for r in versions.itertuples()])
+    attribution_path=OUT/"total_return/manifest.json"
+    total_return_note="全收益基准尚未导入，以下保留价格指数口径。"
+    if attribution_path.exists():
+        binding=read_json(attribution_path)
+        if binding["account_daily_sha256"] != digest(OUT/"phase_daily.csv"):
+            raise ValueError("Total-return attribution uses different account evidence")
+        for name,expected in binding["artifacts"].items():
+            if digest(attribution_path.parent/name) != expected:
+                raise ValueError("Total-return attribution artifact changed")
+        tr=pd.read_csv(attribution_path.parent/"summary.csv")
+        tr=tr.loc[tr.period.eq("all") & tr.benchmark.eq("total_return")].iloc[0]
+        total_return_note=(f"主评价基准已改为沪深300全收益指数H00300，平均信息比率为 **{tr.mean_information_ratio:.3f}**，"
+            f"年化几何超额为 **{tr.mean_geometric_excess_annual:.2%}**，基准累计收益为 **{tr.benchmark_total_return:.2%}**。"
+            "策略净值、收益、回撤和费用不变。下文旧表保留价格指数口径供追溯。"
+            "\n\n[完整全收益及风格归因](total_return/README.md)\n\n"
+            "![价格及全收益基准对照](total_return/benchmark_attribution.png)")
     report=f"""# S6季度联合约束策略研究报告
 
 当前选定版本为 **S6季度重训、L1/L2增强及低复杂度树**（`S6_head6_40_QREG`）。固定2026-10-13数据快照，回放2022-01-04至2026-10-13，五个预设调仓起点的平均复合年化为 **{full.mean_cagr:.2%}**，最差最大回撤为 **{full.worst_drawdown:.2%}**。这些是成本后的历史研究结果。
+
+## 全收益评价基准
+
+{total_return_note}
 
 ## 训练版本与收益口径
 
@@ -314,7 +334,7 @@ S6是组合和模型线的名称，不同重训与约束版本的结果不同。
 
 {phase_table}
 
-五起点平均累计净收益为{full.mean_return:.2%}，平均累计费用{full.mean_fees_cny:,.0f}元，日均双边成交额换手{full.mean_daily_turnover:.2%}，平均持仓{full.mean_holdings:.2f}只。同区间基准累计收益{full.benchmark_return:.2%}。
+五起点平均累计净收益为{full.mean_return:.2%}，平均累计费用{full.mean_fees_cny:,.0f}元，日均双边成交额换手{full.mean_daily_turnover:.2%}，平均持仓{full.mean_holdings:.2f}只。同区间价格基准累计收益{full.benchmark_return:.2%}。
 
 平均年化是每条账户 `(期末净值/初始净值)^(252/交易日数)-1` 的算术平均。不能把累计收益除以年数，也不能将五条净值平均后当作真实账户。最大回撤为各账户相对此前高点的最大跌幅，最差值取五起点中的最大者。
 
@@ -325,7 +345,7 @@ S6是组合和模型线的名称，不同重训与约束版本的结果不同。
 - 夏普：`mean(日净收益-rf_daily) / std(日净收益-rf_daily, ddof=1) * sqrt(252)`。
 - 信息比率：`mean(日净收益-沪深300日收益) / std(日净收益-沪深300日收益, ddof=1) * sqrt(252)`。
 
-五起点分别计算后，平均年化夏普为 **{full.mean_sharpe:.3f}**，范围{full.min_sharpe:.3f}至{full.max_sharpe:.3f}；平均年化信息比率为 **{full.mean_information_ratio:.3f}**，范围{full.min_information_ratio:.3f}至{full.max_information_ratio:.3f}。两项指标均使用成本后日收益和252交易日年化。
+五起点分别计算后，平均年化夏普为 **{full.mean_sharpe:.3f}**，范围{full.min_sharpe:.3f}至{full.max_sharpe:.3f}；旧价格基准的平均年化信息比率为 **{full.mean_information_ratio:.3f}**，范围{full.min_information_ratio:.3f}至{full.max_information_ratio:.3f}。两项指标均使用成本后日收益和252交易日年化；主评价的信息比率使用上文H00300全收益口径。
 
 1%的基准只用于夏普计算，不会给研究账户的闲置现金增加利息，净值、年化收益和最大回撤保持原回放结果。信息比率相对沪深300计算，不扣除该无风险基准。历史冻结实验中的零无风险利率口径仍保留供追溯，当前报告以上述1%口径为准。
 

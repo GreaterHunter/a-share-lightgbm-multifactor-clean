@@ -1,0 +1,51 @@
+{
+  "status": "complete",
+  "strategy_id": "S6_head6_40_QREG",
+  "as_of": "2026-10-13",
+  "created_at_utc": "2026-10-16T10:30:43.523512+00:00",
+  "risk_free_annual": 0.01,
+  "account_daily_sha256": "302b81979ce8387d33dea380d2e0ee9964ac0d500e1d5f91e81a357d2bd6bf09",
+  "implementation_sha256": "92bf87b37cb6001c11a4218eda35f48e050e75072df9af0d2d200bfbc2afbc15",
+  "sources": {
+    "start": "2021-12-31",
+    "end": "2026-10-13",
+    "sources": [
+      {
+        "index_code": "000300",
+        "file": "000300.json",
+        "sha256": "ece52ac3127a4070ff8c5ff64090ba8398dc868f95a145e79e0a44fddcc90da9",
+        "url": "https://www.csindex.com.cn/csindex-home/perf/index-perf?indexCode=000300&startDate=20211231&endDate=20261013",
+        "retrieved_at_utc": "2026-10-16T10:22:51.696139+00:00",
+        "rows": 1155
+      },
+      {
+        "index_code": "H00300",
+        "file": "H00300.json",
+        "sha256": "75e20306f63dc4fdb2d55fe2fb9a757a4241216d9a7295288250fd8f12086d4a",
+        "url": "https://www.csindex.com.cn/csindex-home/perf/index-perf?indexCode=H00300&startDate=20211231&endDate=20261013",
+        "retrieved_at_utc": "2026-10-16T10:22:51.881651+00:00",
+        "rows": 1155
+      }
+    ],
+    "provider": "China Securities Index Co., Ltd.",
+    "redistribution": "Raw official responses remain local; only research aggregates are published."
+  },
+  "alignment": {
+    "days": 1154,
+    "maximum_price_return_difference": 1.6767601978984886e-06,
+    "tolerance": 5e-06,
+    "missing_dates": 0,
+    "first_day_basis": "official close/open",
+    "remaining_days_basis": "official close/previous close"
+  },
+  "artifacts": {
+    "benchmark_attribution.png": "72295813b176ab7a8a50d2eb889d3460652038d2b2255fc12ac4fd0d67ba3bf1",
+    "per_phase.csv": "1cf2f3596e4d51cd78bd965d28955067e516b0d79020f3ed4b6b216a26001d24",
+    "README.md": "71583b0c8d39ff4ccf3a64332bd1fbe129b5d575e35652447a5285127a497562",
+    "regressions.csv": "2c8a7ac8d4043a93d700f5aff8fc2a6d3e218c531e508291ba5cda1af1701630",
+    "style_audit.json": "4d3ba948945c1f3520349bd819a6e67efea097cc66da131d8c9962bfb994a06c",
+    "summary.csv": "123a23051da3f58d7d35341d2941f1b97b336d31d0c31cb79a8a054ec613cfc8"
+  },
+  "historical_account_unchanged": true,
+  "independent_test": false
+}

@@ -1,0 +1,9 @@
+{
+  "return_coverage": 0.9985202697039672,
+  "feature_lag_sessions": 1,
+  "style_definition": "Prior-day cross-sectional top 30% minus bottom 30%, equal weighted",
+  "limitation": "Research proxies, not official traded factor indices; missing returns are not zero-filled.",
+  "panel_sha256": "0995aead990fbddaab7c537b0315270d189c98d961c813e536cf63a3450316c2",
+  "bank_protocol_sha256": "d87022f80b1b704aaea97d7b9f536209d247e913558407b68cb014de91643173",
+  "matched_trading_days": 1153
+}
