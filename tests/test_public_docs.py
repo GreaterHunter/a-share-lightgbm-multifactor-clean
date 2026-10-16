@@ -8,6 +8,8 @@ ROOT = Path(__file__).resolve().parents[1]
 PAGES = ["README.md", "CONTRIBUTING.md", "SECURITY.md",
          "docs/getting_started.md", "docs/architecture.md",
          "docs/data_contract.md", "docs/results.md", "docs/publication_audit.md",
+         "docs/research_report.md", "docs/history/annual_top50_report.md",
+         "reports/current_strategy/README.md", "reports/main_strategy/README.md",
          "paper_futu/README.md", "paper_futu/CSI300_PAPER.md", "paper_futu/S6_CURRENT_DEPLOYMENT.md"]
 
 

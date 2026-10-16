@@ -2,6 +2,8 @@
 
 当前展示的是历史研究敏感性对照，不是实盘业绩或未来收益承诺。2022—2026已反复用于窗口、期限、持仓与调仓研究；因果时间切分不消除策略选择偏差。
 
+当前选定的是**S6季度联合约束版本**。17.13%和17.36%分别属于原年度与原季度版本；当前版本的五起点平均年化是18.85%。完整净值、回撤、年度收益和逐起点表格见[当前策略报告](../reports/current_strategy/README.md)。
+
 ## 当前版本证据
 
 连续账户从2022-01-04运行至2026-10-13，初始100万元现金，五个预设调仓偏移0/1/2/3/4，跨年不重置节奏。H10预测、R5调仓、Top20前6名占股票仓位40%、最多更换6只保持不变。
@@ -13,7 +15,7 @@
 | 季度原版 | 17.36% | 29.45% | 201,881元 | 39.78% |
 | 季度联合约束 | 18.85% | 30.35% | 203,533元 | 40.87% |
 
-来源：[对照HTML](../reports/experiments/s6_quarterly_l1l2_small_asof_20261013/comparison.html)、[汇总CSV](../reports/experiments/s6_quarterly_l1l2_small_asof_20261013/summary.csv)。HTML需下载后在浏览器打开。四种版本共享数据与组合规则，联合约束同时修改L1/L2和复杂度，不能把收益变化单独归因于其中一项。
+来源：[可复算的每日汇总](../reports/current_strategy/phase_daily.csv)、[逐起点指标](../reports/current_strategy/phase_metrics.csv)、[原实验汇总CSV](../reports/experiments/s6_quarterly_l1l2_small_asof_20261013/summary.csv)。四种版本共享数据与组合规则，联合约束同时修改L1/L2和复杂度，不能把收益变化单独归因于其中一项。
 
 ## 指标怎么读
 
@@ -39,6 +41,8 @@
 | 四策略过拟合与风格研究 | [方案](../research_overfit_four_README.md) | [诊断HTML](../reports/experiments/overfit_four_asof_20261013/research_findings.html)、[配对区间](../reports/experiments/overfit_four_asof_20261013/paired_block_bootstrap.csv) |
 | 年度/半年/季度重训 | [方案](../research_s6_2026_README.md) | [对照HTML](../reports/experiments/s6_head6_40_2026_holdout_asof_20261013/comparison.html) |
 | 季度联合约束 | [方案](../research_s6_quarterly_regularized_README.md) | [财务覆盖脱敏副本](evidence/financial_coverage.json) |
-| 旧年度Top50 | [历史报告](research_report.md) | 旧标签/旧组合，不与当前版本混用 |
+| 旧年度Top50 | [历史报告](history/annual_top50_report.md) | 旧标签/旧组合，不与当前版本混用 |
 
 文件名中的 `holdout` 是历史命名，不表示这些已观察年份现在仍是独立测试集。新一年从现金开始的账户也不能与跨年连续账户直接拼接比较。
+
+历史HTML中的部分协议、成交或贡献附件仅保留在原本地实验，未随展示仓库分发；当前策略报告的链接均指向本仓库内的公开汇总。

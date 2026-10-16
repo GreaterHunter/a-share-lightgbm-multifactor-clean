@@ -1,0 +1,26 @@
+{
+  "strategy_id": "S6_head6_40_QREG",
+  "experiment": "s6_quarterly_l1l2_small_asof_20261013",
+  "data_cutoff": "2026-10-13",
+  "initial_cash": 1000000,
+  "source_snapshot": "658e24bcaa36c1a52769c70871737e72c5c69a2aac79fb755e385377d5e87992",
+  "source_manifest_sha256": "38d078f6d04dfa6b2cff628558c66f95974d1e5dff093bd77752bfaae1b8267e",
+  "source_protocol_sha256": "d87022f80b1b704aaea97d7b9f536209d247e913558407b68cb014de91643173",
+  "source_sha256": {
+    "summary.csv": "fd07ca50bf4aa65b622d55af81484c3a5ab272e39b08b66c636ee57ce49555ee",
+    "account_period_metrics.csv": "d2e2ea4bd49e8f04873e4af4bc434e58aca7c02e2c9b1a799aaa12eab34bd929",
+    "tasks/account_history_QREG_0.json": "0e6c34cd3b66dd3a7bbeefcd2a04defe3cb625a2122fe6dc15204ef59044ede3",
+    "accounts/history_QREG_0/daily.parquet": "63ac73e3450fff24c55a11efb3f7fad0970537f6fd6527f50dea9a96a7a84c54",
+    "tasks/account_history_QREG_1.json": "0261470d8d11a93847dea4c925528b020dd8c2f92a48aaa792ca325ac386e11e",
+    "accounts/history_QREG_1/daily.parquet": "5e1c86575ab57c97e7115c60f222155c7ec50de4a902a666a08827e95ee7c634",
+    "tasks/account_history_QREG_2.json": "c7131af6dfaf2f501161bb9dd2048296e3c7f3cf805ca6c0135a68b04bc9baff",
+    "accounts/history_QREG_2/daily.parquet": "ae9f0182cd083bf16108abf2b52aff6315ef9f395049f2c005adb7663b16e7b7",
+    "tasks/account_history_QREG_3.json": "e63faa5057990e601a0e3ec460dee2a65c20e2086f750ea20b9f68fa3d131bce",
+    "accounts/history_QREG_3/daily.parquet": "1c23d04f7779310ba9b4fb25f782f3c084f789648ebe24526d5167374c33bb2e",
+    "tasks/account_history_QREG_4.json": "4a79dd76fdf8cf98f3fcc4d0b1c27e0e011f843ab6b8637ae17f15306c9da973",
+    "accounts/history_QREG_4/daily.parquet": "43b529eb4fa0fef426849685274becc9689b2784e4a1ea0fae2e4f12cd9200cf"
+  },
+  "public_daily_sha256": "302b81979ce8387d33dea380d2e0ee9964ac0d500e1d5f91e81a357d2bd6bf09",
+  "scope": "Aggregate historical research accounts only; no broker state, orders or stock-level holdings",
+  "validation": "Source task/manifest hashes and daily NAV/fees checked; period metrics match audited summary"
+}

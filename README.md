@@ -4,7 +4,7 @@
 
 **当前研究主版本：S6季度重训＋L1/L2增强＋低复杂度树。** 项目用于研究与工程实践，不是开箱即用的实盘交易系统，不构成投资建议。
 
-[快速上手](docs/getting_started.md) · [研究结果](docs/results.md) · [架构导航](docs/architecture.md) · [数据与复现](docs/data_contract.md) · [模拟盘说明](paper_futu/S6_CURRENT_DEPLOYMENT.md)
+[快速上手](docs/getting_started.md) · [当前策略报告](reports/current_strategy/README.md) · [指标口径](docs/results.md) · [架构导航](docs/architecture.md) · [数据与复现](docs/data_contract.md) · [模拟盘说明](paper_futu/S6_CURRENT_DEPLOYMENT.md)
 
 这是从已脱敏文件建立的独立展示仓库，提交历史从本版本开始。未分发本机账户配置、模型与交易计划；模拟执行代码中的固定尾号 `0000` 是演示占位值。完整研究所需数据和运行条件见[数据契约](docs/data_contract.md)。
 
@@ -32,9 +32,9 @@
 
 公开参数见 [`configs/experiments/s6_head6_40_public.json`](configs/experiments/s6_head6_40_public.json)，它不包含本机路径、账户或交易切换安排，不能用于直接部署。`configs/main_strategy.yaml` 是旧年度Top50研究配置，不是当前S6部署配置。
 
-## 历史研究结果
+## 当前策略研究结果
 
-固定数据截止2026-10-13，连续账户2022-01-04至2026-10-13，从100万元现金开始，比较5个预设调仓起点：
+固定数据截止2026-10-13，连续账户2022-01-04至2026-10-13，从100万元现金开始，比较5个预设调仓起点。**当前选定季度联合约束版本的平均复合年化为18.85%，五起点最差回撤为30.35%。** 常提到的17%左右对应原年度或原季度版本，具体对照如下：
 
 | 版本 | 平均复合年化 | 五起点最差最大回撤 | 平均累计费用 |
 |---|---:|---:|---:|
@@ -43,9 +43,27 @@
 | S6季度原版 | 17.36% | 29.45% | 20.19万元 |
 | S6季度＋联合约束 | 18.85% | **30.35%** | 20.35万元 |
 
-来源：[原始汇总](reports/experiments/s6_quarterly_l1l2_small_asof_20261013/summary.csv)及[HTML报告](reports/experiments/s6_quarterly_l1l2_small_asof_20261013/comparison.html)（下载后用浏览器打开）。平均年化是五条账户各自复合年化的算术平均，不是累计收益除以年数；费用已计入净收益。
+来源：[逐日净值汇总](reports/current_strategy/phase_daily.csv)、[逐起点指标](reports/current_strategy/phase_metrics.csv)及[原实验汇总](reports/experiments/s6_quarterly_l1l2_small_asof_20261013/summary.csv)。平均年化是五条账户各自复合年化的算术平均，不是累计收益除以年数；费用已计入净收益。
+
+### 五起点净值与最大回撤
+
+展示全部五个预设调仓起点，与同区间沪深300比较；每条曲线都是独立回放账户。回撤包含初始现金高点，红色虚线为原30%研究筛选线。
+
+![S6季度联合约束策略的五起点净值和回撤](reports/current_strategy/figures/nav_drawdown.png)
+
+### 逐年收益
+
+蓝色柱为五起点的平均成本后收益，误差线为最小至最大值；灰色柱为沪深300。2026只统计至10月13日。2024贡献较大，2025虽有正收益仍跑输基准。
+
+![S6逐年净收益与沪深300对比](reports/current_strategy/figures/annual_returns.png)
+
+### S6训练版本对照
+
+![S6年度、半年、季度及当前联合约束版本对照](reports/current_strategy/figures/version_comparison.png)
 
 **联合约束版本仍超过预设30%历史回撤线。** 它是用户选定的研究/模拟版本，不能称为通过全部风险筛选。银行风格暴露、多重试验选择偏差、理想成交和财报修订档案不完整仍是重要限制。2022—2026已反复参与研究，不是新的独立测试；详见[结果口径与局限](docs/results.md)。
+
+完整的年度收益、逐起点指标、组合规则和结果来源见[当前策略报告](reports/current_strategy/README.md)。安装研究依赖后，可运行 `python -m scripts.build_current_strategy_report`，仅用仓库内汇总重建表格和图像。
 
 ## 快速体验
 
@@ -75,7 +93,7 @@ python -m pytest
 |---|---|
 | 数据、标签和复现前提 | [数据契约](docs/data_contract.md) |
 | 训练、回测、部署分别在哪 | [架构导航](docs/architecture.md) |
-| 历史收益如何解释 | [结果说明](docs/results.md) |
+| 当前收益、年度表现和图表 | [主策略报告](reports/current_strategy/README.md)与[指标说明](docs/results.md) |
 | 窗口、正则化与风格依赖 | [四策略风险诊断](research_overfit_four_README.md) |
 | 年度、半年、季度如何比较 | [重训频率实验](research_s6_2026_README.md) |
 | 当前联合约束实验设计 | [季度正则化实验](research_s6_quarterly_regularized_README.md) |

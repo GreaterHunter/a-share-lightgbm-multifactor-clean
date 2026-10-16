@@ -24,6 +24,7 @@
 | 当前季度研究 | `paper_futu/research_s6_quarterly_regularized.py` | 年内固定参数树数、季度成熟边界、缓存绑定 |
 | 父级频率研究 | `paper_futu/research_s6_2026.py` | 年度/半年/季度对照与共享拟合 |
 | 账户 | `paper_futu/s6_explicit_account.py` | 现金、订单、整手、持仓及费用核算 |
+| 当前报告与图表 | `scripts/build_current_strategy_report.py` | 从公开汇总复算指标、生成当前S6报告和PNG，不训练或交易 |
 | 诊断 | `paper_futu/overfit_four_diagnostics.py` | IC、风格残差、时间区块重采样 |
 | 模型部署 | `paper_futu/deploy_s6_quarterly.py` | 模型包、哈希、服务季度、明确切换 |
 | 交易保护 | `paper_futu/cn_common.py`、`execute_cn_plan.py` | 模拟账户限制、仓位差、不可成交处理 |
