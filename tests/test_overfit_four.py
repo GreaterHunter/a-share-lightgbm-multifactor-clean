@@ -147,7 +147,22 @@ def test_controller_lock_rejects_duplicate_run(tmp_path, monkeypatch):
         pass
 
 
-def test_small_real_lightgbm_fit_reloads_identically(tmp_path, monkeypatch):
+@pytest.fixture
+def toy_fit_memory(monkeypatch):
+    # Keep the production guard and real LightGBM fit; isolate the OS probe for
+    # tiny synthetic fixtures from unrelated applications on the test machine.
+    from src import runtime_budget
+    monkeypatch.setattr(runtime_budget, "available_memory_bytes", lambda: 3 * 1024**3)
+
+
+def test_real_training_guard_still_rejects_low_memory(monkeypatch):
+    from src import runtime_budget
+    monkeypatch.setattr(runtime_budget, "available_memory_bytes", lambda: 1024**3)
+    with pytest.raises(RuntimeError, match=r"2\.0 GiB"):
+        core.require_memory(2.0, "training test")
+
+
+def test_small_real_lightgbm_fit_reloads_identically(tmp_path, monkeypatch, toy_fit_memory):
     import lightgbm as lgb
     rng = np.random.default_rng(123)
     sessions = pd.bdate_range("2020-01-01", periods=60)
@@ -165,7 +180,7 @@ def test_small_real_lightgbm_fit_reloads_identically(tmp_path, monkeypatch):
     np.testing.assert_allclose(model.predict(values), loaded.predict(values,num_threads=4), atol=1e-12,rtol=0)
 
 
-def test_annual_fit_serves_exact_source_dates_and_writes_causal_metadata(tmp_path, monkeypatch):
+def test_annual_fit_serves_exact_source_dates_and_writes_causal_metadata(tmp_path, monkeypatch, toy_fit_memory):
     rng = np.random.default_rng(7)
     sessions = pd.bdate_range("2021-09-01", "2022-04-01")
     monkeypatch.setattr(core, "calendar", lambda: sessions)
