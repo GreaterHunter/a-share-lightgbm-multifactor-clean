@@ -1,0 +1,82 @@
+[
+  {
+    "quarter": "2022Q1",
+    "model_sha256": "385b105ab884bf52370d5ebc0be7468892715e1854028d5b111063951a1ea478",
+    "clock_splits": 0
+  },
+  {
+    "quarter": "2022Q2",
+    "model_sha256": "394530d96f718f4545f5095eeacc964c594f7c17a505b88fc4c0b98a75cdbead",
+    "clock_splits": 0
+  },
+  {
+    "quarter": "2022Q3",
+    "model_sha256": "7ae07a7519e594968c4cb7cafdca73d0c5036f3db8eb42a361036e521130ac99",
+    "clock_splits": 0
+  },
+  {
+    "quarter": "2022Q4",
+    "model_sha256": "9b3defcee65e6b74d5e89da28e4858c99902759070c444845f4e290417774b30",
+    "clock_splits": 0
+  },
+  {
+    "quarter": "2023Q1",
+    "model_sha256": "4db7568eb22ff3e981b9730a47a772448492e5ad62d8960cd66c444eb2a817fe",
+    "clock_splits": 0
+  },
+  {
+    "quarter": "2023Q2",
+    "model_sha256": "acd044f051df58162f51d3ae1c07877d246839e57f235f98872d2029b177e715",
+    "clock_splits": 0
+  },
+  {
+    "quarter": "2023Q3",
+    "model_sha256": "04feadc11412eb8d1fbdec8f4b978b0b7a4922b19c62bbf56f34521b00aefb5b",
+    "clock_splits": 0
+  },
+  {
+    "quarter": "2023Q4",
+    "model_sha256": "fb69d812923324670b960bbd35c89873bb156ff47c3136110a4082fa4d9e08ca",
+    "clock_splits": 0
+  },
+  {
+    "quarter": "2024Q1",
+    "model_sha256": "ad01bbab7b6c21bf964c787ba0470f482c3da2e3020f28b618136528644ebdc8",
+    "clock_splits": 0
+  },
+  {
+    "quarter": "2024Q2",
+    "model_sha256": "47ef99e46a3c63cfd9ba3fb57a5231b685e5b360a37f1db8cb5fca343141cffe",
+    "clock_splits": 0
+  },
+  {
+    "quarter": "2024Q3",
+    "model_sha256": "4ddf3adcce4b94a4a932eca1edaeda2bb4f51cd71665ce34a216dce9c179c9be",
+    "clock_splits": 0
+  },
+  {
+    "quarter": "2024Q4",
+    "model_sha256": "72c60580ee1cd83004875292f5f4f66b0897128bb2fea16cd47256d1f4c2505d",
+    "clock_splits": 0
+  },
+  {
+    "quarter": "2025Q1",
+    "model_sha256": "50f7352d15e69908768f6931bccae7ca5819a6d78d2afb4a88de035f45e57e11",
+    "clock_splits": 0
+  },
+  {
+    "quarter": "2025Q2",
+    "model_sha256": "29850f7aeaa2fa0eedd26b17d2460a14c255c3a4ec31143cfbee9d269658ac1a",
+    "clock_splits": 0
+  },
+  {
+    "quarter": "2025Q3",
+    "model_sha256": "126c7f43fbee47110c860255b11141d90a0344f374c29166e71897c631e70196",
+    "clock_splits": 0
+  },
+  {
+    "quarter": "2025Q4",
+    "model_sha256": "9daba3fb80e503eacfdf1fb7e130fdbcb4320cfac69e82e50d8011b4f23a6079",
+    "clock_splits": 0
+  }
+]

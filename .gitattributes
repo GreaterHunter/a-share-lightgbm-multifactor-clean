@@ -19,3 +19,9 @@ reports/current_strategy/*.csv text eol=lf
 reports/current_strategy/total_return/* -text whitespace=cr-at-eol
 paper_futu/benchmark_attribution.py -text whitespace=cr-at-eol,-blank-at-eof
 paper_futu/prospective_s6.py -text whitespace=cr-at-eol,-blank-at-eof
+
+# Preserve published scientific artifact hashes on all platforms.
+reports/research/** -text
+paper_futu/*.py -text
+src/*.py -text
+scripts/*.py -text

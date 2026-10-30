@@ -160,9 +160,15 @@ def closing_marker(path, day):
 
 
 def filled_costs(path):
-    if not Path(path).exists():
+    path = Path(path)
+    supplements = []
+    if path.name.startswith("order_results_"):
+        day = path.stem.removeprefix("order_results_")
+        supplements = sorted(path.parent.glob("correction_v5_"+day+"_*.orders.csv"))
+    paths = ([path] if path.exists() else [])+supplements
+    if not paths:
         return dict(filled_notional=0., modeled_fees_cny=0., orders_with_fills=0)
-    orders = pd.read_csv(path)
+    orders = pd.concat([pd.read_csv(p) for p in paths],ignore_index=True)
     if orders.order_id.astype(str).duplicated().any():
         raise ValueError("Duplicate order receipt")
     fills = orders.loc[pd.to_numeric(orders.dealt_qty).gt(0)].copy()
@@ -256,6 +262,8 @@ def record(output, day=None, now=None):
               "active_plan":digest(state/"active_plan.json"),"benchmark_sources":digest(raw_dir/"sources.json")}
     if execution_path.exists(): evidence["execution"]=digest(execution_path)
     if order_path.exists(): evidence["order_receipts"]=digest(order_path)
+    for supplement in sorted(state.glob("correction_v5_"+day+"_*.orders.csv")):
+        evidence["supplement_"+supplement.name]=digest(supplement)
     result=dict(date=day, observed_at=marker["time"], assets=marker["assets"], cash=marker["cash"],
         holdings=marker["holdings"], broker_nav_return=net, total_return_benchmark=returns["H00300"],
         price_benchmark=returns["000300"], model_sha256=meta["model_sha256"],
@@ -309,9 +317,15 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--stage",choices=["freeze","record","status"],default="status")
     parser.add_argument("--output",type=Path,default=ROOT/"reports/paper_futu/s6_forward_v1")
+    parser.add_argument("--current",action="store_true",help="Use the same pinned protocol as the paper executor")
     parser.add_argument("--attribution",type=Path)
     parser.add_argument("--date")
     args=parser.parse_args()
+    if args.current:
+        if args.stage == "freeze":parser.error("--current cannot create or overwrite a frozen version")
+        from paper_futu.cn_runtime_protocol import active_protocol_directory, verify_active_protocol
+        verify_active_protocol()
+        args.output=active_protocol_directory()
     try:
         if args.stage=="freeze":
             if not args.attribution:parser.error("--attribution manifest is required")

@@ -1,5 +1,7 @@
 # 架构与代码导航
 
+当前执行状态机为 `cn_rank80_strategy.py`／`cn_rank80_runtime.py`（V10）；以下季度模型和 Top20 报告仍作为历史研究基础保留，名称中的“当前”不表示现行持仓。分钟输入使用 `src/cn_intraday_features.py`、`research_cn_minute_ablation.py` 与独立账户模块；风险模型使用 `src/barra_risk.py`／`barra_overlay.py`。最新成果与报告索引见 [成果总结](achievements.md) 和 [报告目录](../reports/README.md)。
+
 研究与模拟执行共享标签和组合约束，但产物、入口及权限分开。为保留科学代码哈希，本次整理不搬动实验实现，也不批量格式化已冻结模块。
 
 ```text

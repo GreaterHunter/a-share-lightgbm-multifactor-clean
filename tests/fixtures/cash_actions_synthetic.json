@@ -1,0 +1,48 @@
+{
+  "schema": 1,
+  "events": [
+    {
+      "instrument": "SZ002475",
+      "ex_date": "2026-10-22",
+      "announcement_date": "2026-10-15",
+      "declared_cash_per_10": 1.099231,
+      "source_cash_decimal_places": 4,
+      "effective_ex_dividend_per_share": 0.1096588,
+      "total_shares": 7347206183,
+      "participating_shares": 7329540803,
+      "announced_total_cash": 805685846.64,
+      "reason": "A-share-only denominator; repurchased shares excluded from distribution. Tencent cash field truncates the issuer's six decimals to four. Exact issuer amount is retained for arithmetic.",
+      "source_url": "https://example.invalid/synthetic-test-evidence",
+      "evidence_path": "fixture_evidence.txt",
+      "evidence_sha256": "01afae8c1a6b6b54bb617a1c5bb32fdc304c941278ee7c34f60761857b812220"
+    },
+    {
+      "instrument": "SZ000425",
+      "ex_date": "2026-10-21",
+      "announcement_date": "2026-10-15",
+      "declared_cash_per_10": 0.45,
+      "effective_ex_dividend_per_share": 0.0447445,
+      "total_shares": 11711210449,
+      "participating_shares": 11644736787,
+      "announced_total_cash": 524013155.41,
+      "reason": "Repurchase-account shares are excluded from cash distribution; the issuer declares a diluted ex-dividend deduction.",
+      "source_url": "https://example.invalid/synthetic-test-evidence",
+      "evidence_path": "fixture_evidence.txt",
+      "evidence_sha256": "01afae8c1a6b6b54bb617a1c5bb32fdc304c941278ee7c34f60761857b812220"
+    },
+    {
+      "instrument": "SZ300433",
+      "ex_date": "2026-10-20",
+      "announcement_date": "2026-10-13",
+      "declared_cash_per_10": 1.0,
+      "effective_ex_dividend_per_share": 0.0999645,
+      "total_shares": 4977145670,
+      "participating_shares": 4975381118,
+      "announced_total_cash": 497538111.8,
+      "reason": "Repurchase-account A shares excluded; issuer declares diluted A-share ex-dividend deduction.",
+      "source_url": "https://example.invalid/synthetic-test-evidence",
+      "evidence_path": "fixture_evidence.txt",
+      "evidence_sha256": "01afae8c1a6b6b54bb617a1c5bb32fdc304c941278ee7c34f60761857b812220"
+    }
+  ]
+}

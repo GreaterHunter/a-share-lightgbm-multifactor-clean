@@ -1,0 +1,13 @@
+{
+  "publication_note": "Derived public research summaries; raw data, model files, broker state and full ledgers are not distributed.",
+  "source_experiment": "momentum_vs_s6_asof_20251231",
+  "artifacts": [
+    {
+      "file": "comparison.csv",
+      "source": "reports/experiments/momentum_vs_s6_asof_20251231/comparison.csv",
+      "source_sha256": "329b5d79fa8d8aa2ff4415ca41602f3435f53ac860fafb1e4f08b6a94ee51474",
+      "public_sha256": "329b5d79fa8d8aa2ff4415ca41602f3435f53ac860fafb1e4f08b6a94ee51474",
+      "derived": false
+    }
+  ]
+}

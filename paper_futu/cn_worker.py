@@ -1,4 +1,4 @@
-"""Run the authorized CSI300 paper strategy while this PC and OpenD stay online."""
+"""Independent closing data; OpenD is required only for account/order operations."""
 
 from __future__ import annotations
 
@@ -10,8 +10,10 @@ import socket
 import subprocess
 import sys
 import time
+from datetime import timedelta
 
 from paper_futu.cn_common import HISTORICAL_PROVIDER, ROOT, STATE_DIR, china_now, load_deployment, validate_plan_deployment
+from paper_futu.cn_runtime_protocol import verify_active_protocol
 
 SDK_PYTHON = ROOT / "paper_futu/.venv/Scripts/python.exe"
 MODEL_PYTHON = "D:/Anaconda/envs/quant-lightgbm/python.exe"
@@ -20,8 +22,11 @@ SESSION_DEADLINE = 16 * 60 + 30
 
 
 def run(module, *args, model=False):
+    timeout = 1800 if module == "paper_futu.update_cn_data" else 1500 if module in {
+        "paper_futu.execute_cn_plan", "paper_futu.resume_cn_rebalance", "paper_futu.correct_cn_position"} else 900
     subprocess.run([MODEL_PYTHON if model else str(SDK_PYTHON), "-m", module, *args],
-                   cwd=ROOT, check=True, timeout=900, stdout=sys.stdout, stderr=sys.stderr,
+                   cwd=ROOT, check=True, timeout=timeout,
+                   stdout=sys.stdout, stderr=sys.stderr,
                    creationflags=subprocess.CREATE_NO_WINDOW)
 
 
@@ -59,23 +64,92 @@ def tick():
     if today not in trading_dates():
         status["stage"] = "non_trading_day"
         return status
-    with socket.create_connection(("127.0.0.1", 11111), timeout=3):
-        pass
     minute = now.hour * 60 + now.minute
-    market_window = 571 <= minute < 690 or 780 <= minute < 895
+    # This branch must precede every broker check. The separate scheduled data
+    # job calls the same locked entry point, so OpenD can be closed all evening.
+    if 935 <= minute < 1380 and not (STATE_DIR / today / "independent_data_ready.json").exists():
+        retry_path=STATE_DIR/'worker_data_retry.json'
+        retry=json.loads(retry_path.read_text(encoding='utf-8')) if retry_path.exists() else {}
+        attempted=retry.get('last_attempt')
+        from datetime import datetime
+        if not attempted or (now-datetime.fromisoformat(attempted)).total_seconds()>=600:
+            retry_path.write_text(json.dumps(dict(last_attempt=now.isoformat())),encoding='utf-8')
+            try:
+                run("paper_futu.update_cn_data", "--date", today, model=True)
+                activated = json.loads((STATE_DIR / "active_plan.json").read_text(encoding="utf-8"))
+                model_dir, metadata = load_deployment()
+                validate_plan_deployment(activated, model_dir, metadata)
+                plan = activated
+                status.update({name: plan[name] for name in
+                    ["signal_date", "execution_date", "next_rebalance_signal_date", "top_k", "n_drop", "model_dir"]})
+                status["data_stage"] = "ready" if (STATE_DIR / today / "plan.json").exists() else "update_in_progress"
+            except Exception as error:
+                status.update(data_stage='error',data_error=str(error))
+                # Continue to an independent account observation; no stale data is published.
+        else:status['data_stage']='retry_backoff'
     execution_done = STATE_DIR / f"execution_{plan['execution_date']}.json"
+    failure_path = STATE_DIR / f"execution_error_{plan['execution_date']}.json"
+    market_window = False
+    if today == plan["execution_date"] and not execution_done.exists():
+        # Check the exact active code/model seal before the opening window, not
+        # only inside a child that fails after 09:31. No broker/API calls here.
+        try:
+            protocol = verify_active_protocol()
+            if protocol["strategy"]["model_sha256"] != plan["model_sha256"]:
+                raise ValueError("Plan model differs from active forward protocol")
+            status["protocol_version"] = protocol["version"]
+        except Exception as error:
+            status.update(stage="execution_protocol_blocked", message=str(error))
+            if not failure_path.exists():
+                failure_path.write_text(json.dumps(status, indent=2), encoding="utf-8")
+            return status
+        from paper_futu.cn_execution_session import normal_bounds
+        start, end = normal_bounds(plan, now)
+        if now >= end - timedelta(seconds=30):
+            status.update(stage="execution_window_missed", message="No completion receipt; explicit recovery authorization required",
+                          execution_window_end=end.isoformat())
+            if failure_path.exists():
+                status["last_execution_error"] = json.loads(failure_path.read_text(encoding="utf-8"))
+            # Keep independent closing/account work; never chase expired orders.
+        elif failure_path.exists():
+            status.update(stage="execution_failed_requires_review",
+                          last_execution_error=json.loads(failure_path.read_text(encoding="utf-8")))
+            return status
+        else:
+            market_window = start <= now < end - timedelta(seconds=30)
+    try:
+        with socket.create_connection(("127.0.0.1", 11111), timeout=3):
+            pass
+    except OSError:
+        status.update(stage="broker_offline", message="Public daily data is independent; account NAV/orders await OpenD")
+        return status
+    from paper_futu.execution_override import execution_allowed
+    if today == plan["execution_date"] and not execution_allowed(plan, now) and not (STATE_DIR / f"execution_{today}.json").exists():
+        market_window = False
+        status["stage"] = "waiting_for_authorized_one_time_window"
     if today == plan["execution_date"] and market_window and not execution_done.exists():
         journal = STATE_DIR / f"orders_{today}.jsonl"
-        if journal.exists() and any(
+        journal_v5 = STATE_DIR / f"orders_v5_{today}.jsonl"
+        if journal_v5.exists() or (journal.exists() and any(
             json.loads(line).get("event") == "before_submit"
             for line in journal.read_text(encoding="utf-8").splitlines()
-        ):
+        )):
             status["stage"] = "order_reconciliation_required"
         else:
             status["stage"] = "executing_paper_rebalance"
             (STATE_DIR / "worker_status.json").write_text(json.dumps(status, indent=2), encoding="utf-8")
-            run("paper_futu.execute_cn_plan", "--submit")
-            status["stage"] = "rebalance_completed"
+            try:
+                run("paper_futu.execute_cn_plan", "--submit")
+            except Exception as error:
+                status.update(stage="execution_failed_requires_review", message=str(error))
+                failure_path.write_text(json.dumps(status, indent=2), encoding="utf-8")
+                return status
+            if execution_done.exists():
+                receipt = json.loads(execution_done.read_text(encoding="utf-8"))
+                status["stage"] = "rebalance_partial_constrained" if receipt.get("status") == "partial_constrained" else "rebalance_completed"
+            else:
+                status.update(stage="execution_receipt_missing", message="Executor returned without a completion receipt")
+                failure_path.write_text(json.dumps(status, indent=2), encoding="utf-8")
     catchup_path = STATE_DIR / "catchup_plan.json"
     if catchup_path.exists():
         catchup = json.loads(catchup_path.read_text(encoding="utf-8"))
@@ -102,28 +176,12 @@ def tick():
     # volume through 15:30, even though the closing price itself is fixed.
     if 935 <= minute < 1380:
         directory = STATE_DIR / today
-        if not (directory / "plan.json").exists():
-            run("paper_futu.fetch_cn_members", "--date", today, model=True)
-            run("paper_futu.fetch_cn_market", "--date", today)
-            options = [] if today >= plan["next_rebalance_signal_date"] else ["--daily-only"]
-            run("paper_futu.build_cn_signal", "--date", today, *options, model=True)
-            if not options:
-                activated = json.loads((STATE_DIR / "active_plan.json").read_text(encoding="utf-8"))
-                status.update({name:activated[name] for name in
-                    ["signal_date","execution_date","next_rebalance_signal_date","top_k","n_drop","model_dir"]})
-            status["stage"] = "closing_features_updated"
         # One independently saved closing account observation per session.
         marker = STATE_DIR / f"nav_saved_{today}.json"
         if not marker.exists():
-            from paper_futu.execute_cn_plan import account_context, paper_account_id, save_account_snapshot
-            trade = account_context()
-            try:
-                account_id = paper_account_id(trade)
-                assets, positions = save_account_snapshot(trade, account_id)
-                marker.write_text(json.dumps({"time": china_now().isoformat(), "assets": float(assets.total_assets),
-                                               "cash": float(assets.cash), "holdings": len(positions)}, indent=2), encoding="utf-8")
-            finally:
-                trade.close()
+            from paper_futu.record_cn_account import observe
+            observed=observe()
+            status['account_stage']=observed['stage']
     return status
 
 
@@ -132,6 +190,10 @@ def main():
     parser.add_argument("--once", action="store_true", help="Run a single readiness/scheduling cycle")
     parser.add_argument("--stop", action="store_true", help="Request the running worker to stop; does not sell holdings")
     args = parser.parse_args()
+    from paper_futu.cn_rank80_runtime import enabled
+    if enabled() and not args.stop:
+        from paper_futu.cn_rank80_runtime import main as rank_main
+        return rank_main(["--once"] if args.once else [])
     STATE_DIR.mkdir(parents=True, exist_ok=True)
     # pythonw hides the window; keep parent and child diagnostics in local log files.
     if sys.stdout is None:

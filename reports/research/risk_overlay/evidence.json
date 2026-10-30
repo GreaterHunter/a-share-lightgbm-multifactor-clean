@@ -1,0 +1,34 @@
+{
+  "publication_note": "Derived public research summaries; raw data, model files, broker state and full ledgers are not distributed.",
+  "source_experiment": "s6_barra_overlay_asof_20261013",
+  "artifacts": [
+    {
+      "file": "comparison.csv",
+      "source": "reports/experiments/s6_barra_overlay_asof_20261013/comparison.csv",
+      "source_sha256": "7e0d416925c9bf1700316f500c44bb87bce98439e06b4460eea95efdd6823706",
+      "public_sha256": "7e0d416925c9bf1700316f500c44bb87bce98439e06b4460eea95efdd6823706",
+      "derived": false
+    },
+    {
+      "file": "paired_differences.csv",
+      "source": "reports/experiments/s6_barra_overlay_asof_20261013/paired_differences.csv",
+      "source_sha256": "386dd014fc5285d6a224fe1b7d27c106fefa9688fa7eeca49c64b3874358bf77",
+      "public_sha256": "386dd014fc5285d6a224fe1b7d27c106fefa9688fa7eeca49c64b3874358bf77",
+      "derived": false
+    },
+    {
+      "file": "risk_tradeoff_summary.csv",
+      "source": "reports/experiments/s6_barra_overlay_asof_20261013/risk_tradeoff_summary.csv",
+      "source_sha256": "5293aa6d40aab6dcb7a1c91185bbcfaedd6808fec29c6c8988b9520f776ae695",
+      "public_sha256": "5293aa6d40aab6dcb7a1c91185bbcfaedd6808fec29c6c8988b9520f776ae695",
+      "derived": false
+    },
+    {
+      "file": "comparison.png",
+      "source": "reports/experiments/s6_barra_overlay_asof_20261013/comparison.png",
+      "source_sha256": "0e9d83369cc45ad57660ee8f04a8b0ba41b34186344e84f5e700e246801101e4",
+      "public_sha256": "0e9d83369cc45ad57660ee8f04a8b0ba41b34186344e84f5e700e246801101e4",
+      "derived": false
+    }
+  ]
+}

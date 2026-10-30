@@ -1,0 +1,55 @@
+{
+  "publication_note": "Derived public research summaries; raw data, model files, broker state and full ledgers are not distributed.",
+  "source_experiment": "barra_s6_industry_size_asof_20261013",
+  "artifacts": [
+    {
+      "file": "bank_exposure_by_year.csv",
+      "source": "reports/experiments/barra_s6_industry_size_asof_20261013/bank_exposure_by_year.csv",
+      "source_sha256": "30cdc7bb2e561cb0e4dd47f69fbc88d5e0c808c76f12627b770547011d9cd479",
+      "public_sha256": "30cdc7bb2e561cb0e4dd47f69fbc88d5e0c808c76f12627b770547011d9cd479",
+      "derived": false
+    },
+    {
+      "file": "findings.json",
+      "source": "reports/experiments/barra_s6_industry_size_asof_20261013/findings.json",
+      "source_sha256": "a8868f3aebbb242b8e2f808d31e7c7bc2f5da00fa85e3564fbe40ed90dcc0072",
+      "public_sha256": "a8868f3aebbb242b8e2f808d31e7c7bc2f5da00fa85e3564fbe40ed90dcc0072",
+      "derived": false
+    },
+    {
+      "file": "findings.png",
+      "source": "reports/experiments/barra_s6_industry_size_asof_20261013/findings.png",
+      "source_sha256": "5280b1f2bd65041676d251e8fde675e50d9b25de89b5514a46dddbee6c52af95",
+      "public_sha256": "5280b1f2bd65041676d251e8fde675e50d9b25de89b5514a46dddbee6c52af95",
+      "derived": false
+    },
+    {
+      "file": "residual_mean_hac.csv",
+      "source": "reports/experiments/barra_s6_industry_size_asof_20261013/residual_mean_hac.csv",
+      "source_sha256": "97f68697945358600cf335efb10f225b97038c65f79a074da133f419a6bd6ae2",
+      "public_sha256": "97f68697945358600cf335efb10f225b97038c65f79a074da133f419a6bd6ae2",
+      "derived": false
+    },
+    {
+      "file": "residual_yearly.csv",
+      "source": "reports/experiments/barra_s6_industry_size_asof_20261013/residual_yearly.csv",
+      "source_sha256": "ac28d19f0dd851f31e012c39d8e4dad05c51d7968a38f9695faa1df0c350a1f4",
+      "public_sha256": "ac28d19f0dd851f31e012c39d8e4dad05c51d7968a38f9695faa1df0c350a1f4",
+      "derived": false
+    },
+    {
+      "file": "residual_linked_contributions.csv",
+      "source": "reports/experiments/barra_s6_industry_size_asof_20261013/residual_linked_contributions.csv",
+      "source_sha256": "38503d2e1320e67e5d72075e051b8dabd9269444e4c8f6c16948ba8991bbdd3d",
+      "public_sha256": "38503d2e1320e67e5d72075e051b8dabd9269444e4c8f6c16948ba8991bbdd3d",
+      "derived": false
+    },
+    {
+      "file": "paired_residual_differences.csv",
+      "source": "reports/experiments/barra_s6_industry_size_asof_20261013/paired_residual_differences.csv",
+      "source_sha256": "17dd9de5ac0a09df9087d523663cfd9e275d2d218c770495eede1732d56915a8",
+      "public_sha256": "17dd9de5ac0a09df9087d523663cfd9e275d2d218c770495eede1732d56915a8",
+      "derived": false
+    }
+  ]
+}

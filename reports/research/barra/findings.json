@@ -1,0 +1,25 @@
+{
+  "as_of": "2026-10-13",
+  "mean_bank_weight_by_year": {
+    "2022": 0.11632685317622553,
+    "2023": 0.39870304366773873,
+    "2024": 0.48716626604830854,
+    "2025": 0.5435054902572778,
+    "2026": 0.5203621667355326
+  },
+  "latest_bank_weight": 0.6113831295745225,
+  "latest_bank_observation": "mean of five historical phase accounts at cutoff, not current live account",
+  "mean_net_residual_annual": 0.01767902839927369,
+  "residual_reduction_vs_reference": 0.7670741178165574,
+  "no_positive_lower_ci_in_all_phases": true,
+  "independent_alpha_proven": false,
+  "linked_residual_by_year": {
+    "2022": 0.024325351718673113,
+    "2023": -0.026671141139866263,
+    "2024": -0.0166484954398711,
+    "2025": 0.008165194611310447,
+    "2026": 0.08791015724650672,
+    "all": 0.15911025993877437
+  },
+  "all_main_phase_intervals_include_zero": true
+}

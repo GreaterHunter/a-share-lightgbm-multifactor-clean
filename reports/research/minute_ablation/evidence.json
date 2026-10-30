@@ -1,0 +1,104 @@
+{
+  "publication_note": "Derived public research summaries; raw data, model files, broker state and full ledgers are not distributed.",
+  "source_experiment": "cn_minute_factor_ablation_asof_20251231",
+  "artifacts": [
+    {
+      "file": "comparison.csv",
+      "source": "reports/experiments/cn_minute_factor_ablation_asof_20251231/comparison.csv",
+      "source_sha256": "2c0d4364ce26f30aa911efb8f8b11e99bdce5c767544dfec84756363cf9c3c60",
+      "public_sha256": "2c0d4364ce26f30aa911efb8f8b11e99bdce5c767544dfec84756363cf9c3c60",
+      "derived": false
+    },
+    {
+      "file": "yearly.csv",
+      "source": "reports/experiments/cn_minute_factor_ablation_asof_20251231/yearly.csv",
+      "source_sha256": "71080311ab4bfdf62b8f4c39a91ce8619cb95b8b4c502b4742431eba511a5ab8",
+      "public_sha256": "71080311ab4bfdf62b8f4c39a91ce8619cb95b8b4c502b4742431eba511a5ab8",
+      "derived": false
+    },
+    {
+      "file": "paired_block_intervals.csv",
+      "source": "reports/experiments/cn_minute_factor_ablation_asof_20251231/paired_block_intervals.csv",
+      "source_sha256": "627672a1fd193aa899c3f11f05ad4635a5f1b175672f5f42ff9076745ef6b421",
+      "public_sha256": "627672a1fd193aa899c3f11f05ad4635a5f1b175672f5f42ff9076745ef6b421",
+      "derived": false
+    },
+    {
+      "file": "rank_ic_yearly.csv",
+      "source": "reports/experiments/cn_minute_factor_ablation_asof_20251231/rank_ic_yearly.csv",
+      "source_sha256": "8b05431ca724fe9c225e1401b02f026c716e567c6fe41d9cb0d6c9515a286c2e",
+      "public_sha256": "8b05431ca724fe9c225e1401b02f026c716e567c6fe41d9cb0d6c9515a286c2e",
+      "derived": false
+    },
+    {
+      "file": "rank_ic_quarterly.csv",
+      "source": "reports/experiments/cn_minute_factor_ablation_asof_20251231/rank_ic_quarterly.csv",
+      "source_sha256": "190a4bf8cd08ccdbd87005a16e424889d50f013e66afd81bc79d80383f47c8af",
+      "public_sha256": "190a4bf8cd08ccdbd87005a16e424889d50f013e66afd81bc79d80383f47c8af",
+      "derived": false
+    },
+    {
+      "file": "top10_stability.csv",
+      "source": "reports/experiments/cn_minute_factor_ablation_asof_20251231/top10_stability.csv",
+      "source_sha256": "3933b1f81ede1a8fb751143bc92d1fbbc4027415be71940df99314fee9be1b6b",
+      "public_sha256": "3933b1f81ede1a8fb751143bc92d1fbbc4027415be71940df99314fee9be1b6b",
+      "derived": false
+    },
+    {
+      "file": "label_coverage.csv",
+      "source": "reports/experiments/cn_minute_factor_ablation_asof_20251231/label_coverage.csv",
+      "source_sha256": "61f289cc8beaa5e75b681d33a61a1515a1b53b91c7ccf9ae980fe58000e3275c",
+      "public_sha256": "61f289cc8beaa5e75b681d33a61a1515a1b53b91c7ccf9ae980fe58000e3275c",
+      "derived": false
+    },
+    {
+      "file": "feature_importance.csv",
+      "source": "reports/experiments/cn_minute_factor_ablation_asof_20251231/feature_importance.csv",
+      "source_sha256": "3f5d3c212f8023ba82adf13ea16b7d6078ac7c4dcf78ac0e619c3299fb988491",
+      "public_sha256": "3f5d3c212f8023ba82adf13ea16b7d6078ac7c4dcf78ac0e619c3299fb988491",
+      "derived": false
+    },
+    {
+      "file": "findings.html",
+      "source": "reports/experiments/cn_minute_factor_ablation_asof_20251231/findings.html",
+      "source_sha256": "a7bd408e169810695656b2f8877232484a1e1c6b1e196c8b64caa7f0f5603bff",
+      "public_sha256": "9cedfd1b78985ff1598b8668812d93774e72d9b6c893068b5d9299109ddb6cc4",
+      "derived": true
+    },
+    {
+      "file": "findings_main.csv",
+      "source": "reports/experiments/cn_minute_factor_ablation_asof_20251231/findings_main.csv",
+      "source_sha256": "570e0f7b74fa0dca95a749cdaf30775807ced517b2dfe6912bfc2160a7c8086e",
+      "public_sha256": "570e0f7b74fa0dca95a749cdaf30775807ced517b2dfe6912bfc2160a7c8086e",
+      "derived": false
+    },
+    {
+      "file": "clock_split_evidence.json",
+      "source": "reports/experiments/cn_minute_factor_ablation_asof_20251231/clock_split_evidence.json",
+      "source_sha256": "e52ac6dc572812cf4002465bef725232852d43b6a089960f473a1a5dc7d94017",
+      "public_sha256": "e52ac6dc572812cf4002465bef725232852d43b6a089960f473a1a5dc7d94017",
+      "derived": false
+    },
+    {
+      "file": "curves.png",
+      "source": "reports/experiments/cn_minute_factor_ablation_asof_20251231/curves.png",
+      "source_sha256": "8d44bd506e908cbdcf4564b07e9f9cc5458ffdcfa351cfb806081431e6a69512",
+      "public_sha256": "8d44bd506e908cbdcf4564b07e9f9cc5458ffdcfa351cfb806081431e6a69512",
+      "derived": false
+    },
+    {
+      "file": "report.html",
+      "source": "reports/experiments/cn_minute_factor_ablation_asof_20251231/report.html",
+      "source_sha256": "917a99ade7a2b32712f00f4a979527917dbb9cc00d7b923c5f70b94d66fb229c",
+      "public_sha256": "ab7a4426eb9c17b0c2323e249fe64d096f07947a0cd1663a6ddfef30a8a8af79",
+      "derived": true
+    },
+    {
+      "file": "rank_ic_daily.csv",
+      "source": "reports/experiments/cn_minute_factor_ablation_asof_20251231/rank_ic_daily.csv",
+      "source_sha256": "b7da73f75aa4d8887553aa9a1caf43b51da05c0f4d774958bd606bcf20d45d60",
+      "public_sha256": "b7da73f75aa4d8887553aa9a1caf43b51da05c0f4d774958bd606bcf20d45d60",
+      "derived": false
+    }
+  ]
+}

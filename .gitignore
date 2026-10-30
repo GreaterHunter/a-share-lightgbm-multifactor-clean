@@ -46,3 +46,7 @@ reports/paper_futu/
 # Selected small, reviewed research summaries are added explicitly with git add -f.
 reports/experiments/*/**
 reports/diagnostics/*/**
+
+# Machine-local active trading protocol and issuer evidence registry
+configs/futu_cn_forward_protocol.json
+configs/verified_cn_cash_actions.json

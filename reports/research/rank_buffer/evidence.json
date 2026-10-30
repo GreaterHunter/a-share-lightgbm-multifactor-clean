@@ -1,0 +1,23 @@
+{
+  "scope": "Historical ranking-buffer comparisons; 2026 is a separate account and is not independent untouched data.",
+  "artifacts": [
+    {
+      "path": "benchmark.csv",
+      "sha256": "12e427e39f27892c761df8b8d79ec9c2c175b39cc07a122871931dbf4ab87b1b",
+      "source": "reports/analysis/top28_excess_2021_2026/benchmark.csv",
+      "source_sha256": "12e427e39f27892c761df8b8d79ec9c2c175b39cc07a122871931dbf4ab87b1b"
+    },
+    {
+      "path": "ranking.csv",
+      "sha256": "2e55fec82a69b47987922dcde802da7a28f258650aafee9e01784f6f32f5b3e3",
+      "source": "reports/analysis/top28_excess_2021_2026/ranking.csv",
+      "source_sha256": "2e55fec82a69b47987922dcde802da7a28f258650aafee9e01784f6f32f5b3e3"
+    },
+    {
+      "path": "yearly.csv",
+      "sha256": "f3e66e79a121a579b6c3ca223c01fd51b05999d8c9da3efd5ade44f117fddd23",
+      "source": "reports/analysis/top28_excess_2021_2026/yearly.csv",
+      "source_sha256": "f3e66e79a121a579b6c3ca223c01fd51b05999d8c9da3efd5ade44f117fddd23"
+    }
+  ]
+}

@@ -47,7 +47,8 @@ def pending_model(config, current_metadata):
 
 
 def model_for_signal(signal_date):
-    directory, metadata = common.load_deployment()
+    from paper_futu.execution_override import late_activation_allowed
+    directory, metadata = common.load_deployment(require_aligned=not late_activation_allowed(signal_date, common.china_now()))
     config = json.loads(common.DEPLOYMENT_PATH.read_text(encoding="utf-8"))
     pending = config.get("pending_deployment")
     if pending and signal_date >= pending["effective_signal_date"]:
@@ -66,7 +67,8 @@ def activate_pending(plan):
     pending = config.get("pending_deployment")
     if not pending or plan["signal_date"] < pending["effective_signal_date"]:
         return False
-    _, current = common.load_deployment()
+    from paper_futu.execution_override import late_activation_allowed
+    _, current = common.load_deployment(require_aligned=not late_activation_allowed(plan["signal_date"], common.china_now()))
     directory, metadata = pending_model(config, current)
     common.validate_plan_deployment(plan, directory, metadata)
     active_path = common.STATE_DIR / "active_plan.json"

@@ -11,13 +11,16 @@ from paper_futu.cn_common import CHINA_TZ
 
 @pytest.fixture
 def scheduler(tmp_path, monkeypatch):
+    from paper_futu import cn_rank80_runtime
+    monkeypatch.setattr(cn_rank80_runtime, "enabled", lambda: False)
     plan = {"signal_date": "2026-10-12", "execution_date": "2026-10-13",
             "next_rebalance_signal_date": "2026-10-26", "model_year": 2026,
-            "top_k": 10, "n_drop": 3, "model_dir": "models/test"}
+            "top_k": 10, "n_drop": 3, "model_dir": "models/test", "model_sha256": "test-model"}
     (tmp_path / "active_plan.json").write_text(json.dumps(plan))
     monkeypatch.setattr(worker, "STATE_DIR", tmp_path)
     monkeypatch.setattr(worker, "load_deployment", lambda: (tmp_path, {}))
     monkeypatch.setattr(worker, "validate_plan_deployment", lambda *args: None)
+    monkeypatch.setattr(worker, "verify_active_protocol", lambda: {"version": 8, "strategy": {"model_sha256": "test-model"}})
     monkeypatch.setattr(worker, "trading_dates", lambda: {"2026-10-12", "2026-10-13", "2026-10-14"})
 
     class FakeSocket:
@@ -38,13 +41,18 @@ def scheduler(tmp_path, monkeypatch):
 def test_no_submit_outside_planned_execution_window(scheduler, monkeypatch, stamp):
     _, calls = scheduler
     monkeypatch.setattr(worker, "china_now", lambda: datetime.fromisoformat(stamp).replace(tzinfo=CHINA_TZ))
-    assert worker.tick()["stage"] == "waiting"
+    expected = "execution_window_missed" if stamp in {"2026-10-13T12:00:00", "2026-10-13T14:55:00"} else "waiting"
+    assert worker.tick()["stage"] == expected
     assert calls == []
 
 
 def test_planned_morning_executes_and_completion_prevents_duplicates(scheduler, monkeypatch):
     state_dir, calls = scheduler
     monkeypatch.setattr(worker, "china_now", lambda: datetime(2026, 10, 13, 9, 31, tzinfo=CHINA_TZ))
+    def execute(*args, **kwargs):
+        calls.append((args, kwargs))
+        (state_dir / "execution_2026-10-13.json").write_text('{"status":"completed"}')
+    monkeypatch.setattr(worker, "run", execute)
     assert worker.tick()["stage"] == "rebalance_completed"
     assert calls == [(("paper_futu.execute_cn_plan", "--submit"), {})]
     (state_dir / "execution_2026-10-13.json").write_text("{}")
@@ -116,3 +124,16 @@ def test_worker_exits_before_0920_without_broker_calls(scheduler, monkeypatch):
     worker.main()
     assert calls == []
     assert json.loads((state_dir / "worker_status.json").read_text())["stage"] == "outside_session"
+
+
+def test_data_update_precedes_broker_check_when_opend_is_offline(scheduler, monkeypatch):
+    state_dir, calls = scheduler
+    monkeypatch.setattr(worker, "china_now", lambda: datetime(2026, 10, 13, 15, 40, tzinfo=CHINA_TZ))
+    def disconnected(*args, **kwargs):
+        assert calls == [(("paper_futu.update_cn_data", "--date", "2026-10-13"), {"model": True})]
+        raise ConnectionRefusedError("OpenD intentionally offline")
+    monkeypatch.setattr(worker.socket, "create_connection", disconnected)
+    result = worker.tick()
+    assert result["stage"] == "broker_offline"
+    assert not (state_dir/"nav_saved_2026-10-13.json").exists()
+    assert all("--submit" not in args for args, _ in calls)

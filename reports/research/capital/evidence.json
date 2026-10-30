@@ -1,0 +1,13 @@
+{
+  "publication_note": "Derived public research summaries; raw data, model files, broker state and full ledgers are not distributed.",
+  "source_experiment": "rank80_capital_10k_asof_20251231",
+  "artifacts": [
+    {
+      "file": "comparison.csv",
+      "source": "reports/experiments/rank80_capital_10k_asof_20251231/comparison.csv",
+      "source_sha256": "7be76e23ffa9ae2de9967cadf039244ebed3f42d6b997cd4a8f8a235599b3f66",
+      "public_sha256": "7be76e23ffa9ae2de9967cadf039244ebed3f42d6b997cd4a8f8a235599b3f66",
+      "derived": false
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "purpose": "Documentation only; not an account or execution authorization",
+  "model": "S6 quarterly QREG raw15 rank-target H10",
+  "top_k": 10,
+  "rank_exit": 80,
+  "strong_entry_rank": 1,
+  "take_profit": 0.1,
+  "stop_loss": 0.05,
+  "stock_budget": 0.95,
+  "initial_position_weight": 0.095,
+  "profit_cooldown_sessions": 2,
+  "loss_cooldown_sessions": 3,
+  "retained_weights": "drift",
+  "signal": "completed daily close",
+  "execution": "next trading session bounded limit-order window; not guaranteed opening price",
+  "corporate_actions": "reconcile adjustment-factor changes even when an exit intent is pending"
+}

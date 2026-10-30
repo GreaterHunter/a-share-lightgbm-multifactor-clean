@@ -14,6 +14,18 @@ PAGES = ["README.md", "CONTRIBUTING.md", "SECURITY.md",
          "reports/current_strategy/README.md", "reports/main_strategy/README.md",
          "reports/current_strategy/total_return/README.md", "docs/prospective_s6.md",
          "paper_futu/README.md", "paper_futu/CSI300_PAPER.md", "paper_futu/S6_CURRENT_DEPLOYMENT.md"]
+PAGES += ["docs/achievements.md", "docs/current_paper_strategy.md",
+          "docs/artifact_retention.md", "reports/README.md", "reports/research/barra/README.md"]
+
+
+def test_published_research_artifact_hashes():
+    for manifest in (ROOT / "reports/research").glob("*/evidence.json"):
+        evidence = json.loads(manifest.read_text(encoding="utf-8"))
+        for item in evidence["artifacts"]:
+            name = item.get("file", item.get("path"))
+            expected = item.get("public_sha256", item.get("sha256"))
+            assert Path(name).name == name
+            assert hashlib.sha256((manifest.parent / name).read_bytes()).hexdigest() == expected
 
 
 def test_public_documentation_links_resolve():

@@ -6,6 +6,7 @@ import argparse
 from datetime import datetime, timezone
 import hashlib
 import json
+from pathlib import Path
 import subprocess
 
 import lightgbm as lgb
@@ -16,7 +17,7 @@ from qlib.config import REG_CN
 from qlib.data import D
 import requests
 
-from paper_futu.cn_common import HISTORICAL_PROVIDER, ROOT, STATE_DIR, load_deployment, to_futu_code, validate_serving_date
+from paper_futu.cn_common import HISTORICAL_PROVIDER, ROOT, STATE_DIR, load_deployment, to_futu_code, validate_serving_date, china_now
 from paper_futu.cn_deployment import activate_pending, model_for_signal
 from src.forward_labels import label_contract, LEGACY_OPEN_TO_CLOSE
 from src.build_enhanced_dataset import merge_latest_event, prepare_annual_eps_events, prepare_general_report_events, validate_point_in_time
@@ -152,15 +153,26 @@ def main():
     parser.add_argument("--daily-only", action="store_true", help="Update daily features without replacing the scheduled rebalance plan")
     parser.add_argument("--model-dir", help="Explicit model for an isolated, no-order readiness check")
     parser.add_argument("--output-dir", help="Separate readiness output; required with --model-dir")
+    parser.add_argument("--prebuilt-bars", type=Path, help="Validated independent market package; never uses OpenD")
     args = parser.parse_args()
     date = pd.Timestamp(args.date)
     directory = STATE_DIR / args.date
+    if args.prebuilt_bars:
+        from paper_futu.independent_cn_market import sha
+        directory = args.prebuilt_bars.resolve().parent
+        manifest = json.loads((directory / "market_manifest.json").read_text(encoding="utf-8"))
+        if (manifest.get("status") != "validated" or manifest.get("validation_schema") != 2 or manifest.get("date") != args.date
+                or args.prebuilt_bars.name != "bars.parquet"):
+            raise ValueError("Independent daily market package is not validated")
+        for name in ["bars.parquet", "bars_units.json", "members.csv", "snapshots.csv"]:
+            if sha(directory / name) != manifest["artifacts"][name]:
+                raise ValueError(f"Independent market artifact changed: {name}")
     output = directory
     if bool(args.model_dir) != bool(args.output_dir) or (args.model_dir and not args.daily_only):
         raise ValueError("Explicit model checks require --daily-only and a separate --output-dir")
     members = pd.read_csv(directory / "members.csv")
     snapshots = pd.read_csv(directory / "snapshots.csv").set_index("code", drop=False)
-    actions = pd.read_csv(directory / "corporate_actions.csv")
+    actions = (pd.DataFrame() if args.prebuilt_bars else pd.read_csv(directory / "corporate_actions.csv"))
     if args.model_dir:
         model_dir = (ROOT / args.model_dir).resolve()
         output = (ROOT / args.output_dir).resolve()
@@ -187,10 +199,15 @@ def main():
                         start_time=str(start.date()), end_time=str(historical_end.date()), freq="day")
     prices.columns = ["open", "close", "high", "low", "volume", "factor"]
     prices = prices.sort_index()
-    for daily_path in sorted(STATE_DIR.glob("*/bars.parquet")):
-        if daily_path.parent.name < args.date:
-            earlier = read_saved_bars(daily_path)
-            prices = pd.concat([prices, earlier]).sort_index()
+    from paper_futu.cn_daily_history import prior_saved_parts,merge_history
+    prices=merge_history([prices,*prior_saved_parts(args.date)])
+    if args.prebuilt_bars:
+        bars = read_saved_bars(args.prebuilt_bars)
+        if (set(bars.index.get_level_values("datetime")) != {date}
+                or set(bars.index.get_level_values("instrument")) != set(members.instrument)
+                or bars.index.has_duplicates):
+            raise ValueError("Independent bar dates or stock universe differ")
+        prices = pd.concat([prices, bars]).sort_index()
     if prices.index.duplicated().any():
         raise ValueError("Historical/live bars overlap")
     # Some community-provider symbols stop early; fill only verified missing dates
@@ -201,6 +218,8 @@ def main():
         if stock.index.get_level_values("datetime").max() < historical_end and not bool(snapshots.loc[to_futu_code(instrument)].suspension):
             gaps[to_futu_code(instrument)] = str(stock.index.get_level_values("datetime").max().date())
     if gaps:
+        if args.prebuilt_bars:
+            raise ValueError("Independent market package has unresolved historical gaps; no OpenD fallback")
         (output / "history_gaps.json").write_text(json.dumps(gaps, indent=2), encoding="utf-8")
         if any(not (directory / "history" / f"{code}.csv").exists() for code in gaps):
             subprocess.run([str(ROOT / "paper_futu/.venv/Scripts/python.exe"), "-m", "paper_futu.fetch_cn_market",
@@ -314,6 +333,15 @@ def main():
         **{name: metadata[name] for name in ["input_kind", "retrain_months", "information_cutoff", "selection_rule"] if name in metadata},
         "qlib_formula_max_differences": differences.to_dict(), "stage": "ready_for_next_session",
     }
+    if args.daily_only:
+        observed_now=china_now()
+        plan.update(data_only_prediction=True,not_an_execution_authorization=True,
+                    retrospectively_generated=observed_now.date()>date.date(),
+                    stage='daily_inference_only')
+    if args.prebuilt_bars:
+        plan.update(market_data_source="independent_public_daily",
+                    market_manifest_sha256=sha(directory / "market_manifest.json"),
+                    market_validation_schema=manifest["validation_schema"])
     (output / "plan.json").write_text(json.dumps(plan, indent=2), encoding="utf-8")
     if not args.daily_only:
         if not activate_pending(plan):
