@@ -1,0 +1,821 @@
+{
+  "status": "summary_only_originals_retired",
+  "experiments": 59,
+  "tables": 300,
+  "items": [
+    {
+      "experiment": "all_full15_offsets_asof_20261013",
+      "table_rows": {
+        "all_full15_phase_ranking.csv": 1551,
+        "rank_rank_phase_ranking.csv": 770
+      },
+      "state": {}
+    },
+    {
+      "experiment": "barra_s6_asof_20261013",
+      "table_rows": {
+        "descriptor_coverage.csv": 16620,
+        "return_attribution.csv": 480
+      },
+      "state": {
+        "completion.json": {
+          "status": "invalidated",
+          "reason": "Pre-release audit found date-vs-column denominator alignment in rolling Beta. Beta and residual volatility missing; replaced by verified v1 run. Do not use this report."
+        },
+        "status.json": {
+          "reason": "rolling beta alignment corrected in separate v1 output"
+        }
+      }
+    },
+    {
+      "experiment": "barra_s6_industry_size_asof_20261013",
+      "table_rows": {
+        "bank_exposure_by_year.csv": 5,
+        "paired_residual_differences.csv": 15,
+        "residual_linked_contributions.csv": 120,
+        "residual_yearly.csv": 100
+      },
+      "state": {
+        "completion.json": {
+          "status": "complete"
+        },
+        "status.json": {}
+      }
+    },
+    {
+      "experiment": "barra_s6_v1_asof_20261013",
+      "table_rows": {
+        "descriptor_coverage.csv": 16620,
+        "return_attribution.csv": 480
+      },
+      "state": {
+        "completion.json": {
+          "status": "complete"
+        },
+        "status.json": {
+          "stage": "all"
+        }
+      }
+    },
+    {
+      "experiment": "cn_intraday_data_feasibility_20261029",
+      "table_rows": {
+        "hf_stock_coverage.csv": 5795
+      },
+      "state": {
+        "status.json": {
+          "status": "public_data_preparation_running"
+        }
+      }
+    },
+    {
+      "experiment": "cn_intraday_etfproxy_asof_20251231",
+      "table_rows": {
+        "coverage_gaps.csv": 4190,
+        "research__comparison.csv": 4,
+        "research__exit_reasons.csv": 16,
+        "research__feature_importance.csv": 704,
+        "research__sampled_rank_ic_yearly.csv": 8,
+        "research__stock_contributions.csv": 980,
+        "research__trade_statistics.csv": 4,
+        "research__yearly.csv": 16
+      },
+      "state": {}
+    },
+    {
+      "experiment": "cn_intraday_rank_exit_asof_20251231",
+      "table_rows": {
+        "comparison.csv": 6,
+        "exit_reasons.csv": 20,
+        "yearly.csv": 24
+      },
+      "state": {
+        "completion.json": {
+          "status": "complete_and_audited"
+        },
+        "status.json": {
+          "status": "complete",
+          "time": 1793343541.6542861
+        }
+      }
+    },
+    {
+      "experiment": "cn_intraday_stop4_asof_20251231",
+      "table_rows": {
+        "comparison.csv": 4,
+        "exit_reasons.csv": 16,
+        "yearly.csv": 16
+      },
+      "state": {
+        "completion.json": {
+          "status": "complete_and_audited"
+        },
+        "status.json": {
+          "status": "complete",
+          "time": 1793344580.7885396
+        }
+      }
+    },
+    {
+      "experiment": "cn_latest_mature_open10_20261012",
+      "table_rows": {
+        "iteration_candidates.csv": 7,
+        "latest_feature_importance.csv": 15,
+        "latest_signal_ranking.csv": 299,
+        "model_comparison.csv": 2,
+        "recent_feature_coverage.csv": 15,
+        "refreshed_at_20260630_feature_importance.csv": 15,
+        "validation_folds.csv": 21
+      },
+      "state": {}
+    },
+    {
+      "experiment": "cn_minute_factor_ablation_asof_20251231",
+      "table_rows": {
+        "comparison.csv": 28,
+        "exit_reasons.csv": 112,
+        "feature_importance.csv": 1936,
+        "label_coverage.csv": 48,
+        "paired_block_intervals.csv": 36,
+        "rank_ic_yearly.csv": 24,
+        "yearly.csv": 112
+      },
+      "state": {
+        "completion.json": {
+          "status": "complete_and_audited"
+        },
+        "status.json": {
+          "status": "complete",
+          "time": 1793349852.7841337
+        }
+      }
+    },
+    {
+      "experiment": "correct_open_grid_top10_2022_2026_asof_20261013",
+      "table_rows": {
+        "comparison.csv": 26,
+        "h10_open_to_open_selection_folds.csv": 49,
+        "h10_open_to_open_tree_selection.csv": 35,
+        "h20_open_to_open_selection_folds.csv": 49,
+        "h20_open_to_open_tree_selection.csv": 35,
+        "h30_open_to_open_selection_folds.csv": 49,
+        "h30_open_to_open_tree_selection.csv": 35,
+        "h40_open_to_open_selection_folds.csv": 49,
+        "h40_open_to_open_tree_selection.csv": 35,
+        "h5_open_to_open_selection_folds.csv": 49,
+        "h5_open_to_open_tree_selection.csv": 35,
+        "h60_open_to_open_selection_folds.csv": 49,
+        "h60_open_to_open_tree_selection.csv": 35,
+        "training_summary.csv": 30,
+        "yearly.csv": 130,
+        "yearly_return_matrix.csv": 26
+      },
+      "state": {}
+    },
+    {
+      "experiment": "final_ablation_asof_20261013",
+      "table_rows": {
+        "cadence_comparison.csv": 120,
+        "cadence_pilot.csv": 24,
+        "final_selection.csv": 15,
+        "frozen_latest_ranking.csv": 300,
+        "frozen_vs_reference_yearly.csv": 10,
+        "model_ablation.csv": 112,
+        "parameter_search.csv": 3150,
+        "portfolio_coarse.csv": 1280,
+        "portfolio_fine.csv": 11264,
+        "randomness.csv": 160,
+        "reference.csv": 8,
+        "robustness_all.csv": 1800
+      },
+      "state": {}
+    },
+    {
+      "experiment": "horizon_10d_rolling",
+      "table_rows": {
+        "backtest_comparison.csv": 2,
+        "backtest_yearly.csv": 6,
+        "training_summary.csv": 3
+      },
+      "state": {}
+    },
+    {
+      "experiment": "horizon_15d_rolling",
+      "table_rows": {
+        "backtest_comparison.csv": 3,
+        "backtest_yearly.csv": 9,
+        "training_summary.csv": 3
+      },
+      "state": {}
+    },
+    {
+      "experiment": "horizon_60_top10_2022_2025",
+      "table_rows": {
+        "comparison.csv": 8,
+        "comparison_extra_10bp.csv": 8,
+        "horizon_60d_training.csv": 4,
+        "horizon_60d_tree_selection.csv": 28,
+        "horizon_60d_validation_folds.csv": 84,
+        "yearly.csv": 32,
+        "yearly_extra_10bp.csv": 32
+      },
+      "state": {}
+    },
+    {
+      "experiment": "horizon_expanded_2021_2025",
+      "table_rows": {
+        "comparison_expanded_top10.csv": 26,
+        "comparison_expanded_top5.csv": 26,
+        "comparison_top10_vs_top5_2021_2025.csv": 26,
+        "horizon_10d_training.csv": 5,
+        "horizon_10d_tree_selection.csv": 35,
+        "horizon_10d_validation_folds.csv": 105,
+        "horizon_20d_training.csv": 5,
+        "horizon_20d_tree_selection.csv": 35,
+        "horizon_20d_validation_folds.csv": 105,
+        "horizon_30d_training.csv": 5,
+        "horizon_30d_tree_selection.csv": 35,
+        "horizon_30d_validation_folds.csv": 105,
+        "horizon_40d_training.csv": 5,
+        "horizon_40d_tree_selection.csv": 35,
+        "horizon_40d_validation_folds.csv": 105,
+        "horizon_5d_training.csv": 5,
+        "horizon_5d_tree_selection.csv": 35,
+        "horizon_5d_validation_folds.csv": 105,
+        "horizon_60d_training.csv": 5,
+        "horizon_60d_tree_selection.csv": 35,
+        "horizon_60d_validation_folds.csv": 105,
+        "yearly_expanded_top10.csv": 130,
+        "yearly_expanded_top5.csv": 130,
+        "yearly_top10_vs_top5_2021_2025.csv": 130
+      },
+      "state": {}
+    },
+    {
+      "experiment": "horizon_expanded_2026_jan_jul",
+      "table_rows": {
+        "comparison_added_top10.csv": 9,
+        "comparison_added_top10_extra_10bp.csv": 9,
+        "comparison_expanded_top5.csv": 26,
+        "comparison_expanded_top5_extra_10bp.csv": 26,
+        "comparison_top10_vs_top5_2026.csv": 26,
+        "horizon_40d_training.csv": 1,
+        "horizon_40d_tree_selection.csv": 7,
+        "horizon_40d_validation_folds.csv": 21,
+        "horizon_5d_training.csv": 1,
+        "horizon_5d_tree_selection.csv": 7,
+        "horizon_5d_validation_folds.csv": 21,
+        "yearly_added_top10.csv": 9,
+        "yearly_added_top10_extra_10bp.csv": 9,
+        "yearly_expanded_top5.csv": 26,
+        "yearly_expanded_top5_extra_10bp.csv": 26
+      },
+      "state": {}
+    },
+    {
+      "experiment": "horizon_grid_top10_2022_2025",
+      "table_rows": {
+        "comparison.csv": 9,
+        "comparison_extra_10bp.csv": 9,
+        "horizon_10d_training.csv": 4,
+        "horizon_10d_tree_selection.csv": 28,
+        "horizon_10d_validation_folds.csv": 84,
+        "horizon_20d_training.csv": 4,
+        "horizon_20d_tree_selection.csv": 28,
+        "horizon_20d_validation_folds.csv": 84,
+        "horizon_30d_training.csv": 4,
+        "horizon_30d_tree_selection.csv": 28,
+        "horizon_30d_validation_folds.csv": 84,
+        "yearly.csv": 36,
+        "yearly_extra_10bp.csv": 36
+      },
+      "state": {}
+    },
+    {
+      "experiment": "horizon_grid_top10_2026_jan_jul",
+      "table_rows": {
+        "comparison.csv": 17,
+        "comparison_extra_10bp.csv": 17,
+        "horizon_10d_training.csv": 1,
+        "horizon_10d_tree_selection.csv": 7,
+        "horizon_10d_validation_folds.csv": 21,
+        "horizon_20d_training.csv": 1,
+        "horizon_20d_tree_selection.csv": 7,
+        "horizon_20d_validation_folds.csv": 21,
+        "horizon_30d_training.csv": 1,
+        "horizon_30d_tree_selection.csv": 7,
+        "horizon_30d_validation_folds.csv": 21,
+        "horizon_60d_training.csv": 1,
+        "horizon_60d_tree_selection.csv": 7,
+        "horizon_60d_validation_folds.csv": 21,
+        "yearly.csv": 17,
+        "yearly_extra_10bp.csv": 17
+      },
+      "state": {}
+    },
+    {
+      "experiment": "label_grid_top10_2022_2025",
+      "table_rows": {
+        "comparison.csv": 64,
+        "h10_open_to_close_selection_folds.csv": 42,
+        "h10_open_to_close_tree_selection.csv": 28,
+        "h10_open_to_open_selection_folds.csv": 42,
+        "h10_open_to_open_tree_selection.csv": 28,
+        "h15_open_to_close_selection_folds.csv": 42,
+        "h15_open_to_close_tree_selection.csv": 28,
+        "h15_open_to_open_selection_folds.csv": 42,
+        "h15_open_to_open_tree_selection.csv": 28,
+        "h20_open_to_close_selection_folds.csv": 42,
+        "h20_open_to_close_tree_selection.csv": 28,
+        "h20_open_to_open_selection_folds.csv": 42,
+        "h20_open_to_open_tree_selection.csv": 28,
+        "h30_open_to_close_selection_folds.csv": 42,
+        "h30_open_to_close_tree_selection.csv": 28,
+        "h30_open_to_open_selection_folds.csv": 42,
+        "h30_open_to_open_tree_selection.csv": 28,
+        "h40_open_to_close_selection_folds.csv": 42,
+        "h40_open_to_close_tree_selection.csv": 28,
+        "h40_open_to_open_selection_folds.csv": 42,
+        "h40_open_to_open_tree_selection.csv": 28,
+        "h5_open_to_close_selection_folds.csv": 42,
+        "h5_open_to_close_tree_selection.csv": 28,
+        "h5_open_to_open_selection_folds.csv": 42,
+        "h5_open_to_open_tree_selection.csv": 28,
+        "h60_open_to_close_selection_folds.csv": 42,
+        "h60_open_to_close_tree_selection.csv": 28,
+        "h60_open_to_open_selection_folds.csv": 42,
+        "h60_open_to_open_tree_selection.csv": 28,
+        "training_summary.csv": 56,
+        "yearly.csv": 256,
+        "yearly_return_matrix.csv": 64
+      },
+      "state": {}
+    },
+    {
+      "experiment": "locked_2025_validation",
+      "table_rows": {
+        "backtest_comparison.csv": 3,
+        "test_ic_summary.csv": 2,
+        "training_summary.csv": 2
+      },
+      "state": {}
+    },
+    {
+      "experiment": "main_10d_five_year_rolling_2021_2025",
+      "table_rows": {
+        "backtest_summary.csv": 1,
+        "backtest_yearly.csv": 5,
+        "training_summary.csv": 5
+      },
+      "state": {}
+    },
+    {
+      "experiment": "main_10d_train10_valid2_rolling_2022_2025",
+      "table_rows": {
+        "backtest_summary.csv": 1,
+        "backtest_yearly.csv": 4,
+        "training_summary.csv": 4
+      },
+      "state": {}
+    },
+    {
+      "experiment": "main_until_2026_07",
+      "table_rows": {
+        "backtest_comparison.csv": 1,
+        "backtest_yearly.csv": 5,
+        "fundamental_coverage.csv": 3,
+        "iteration_candidate_summary.csv": 14,
+        "subperiod_comparison.csv": 3,
+        "test_ic_summary.csv": 5,
+        "training_summary.csv": 5,
+        "validation_folds.csv": 42
+      },
+      "state": {}
+    },
+    {
+      "experiment": "main_walk_forward_cv",
+      "table_rows": {
+        "iteration_candidate_summary.csv": 21,
+        "training_summary.csv": 3,
+        "validation_folds.csv": 63
+      },
+      "state": {}
+    },
+    {
+      "experiment": "momentum_vs_s6_asof_20251231",
+      "table_rows": {
+        "comparison.csv": 3,
+        "momentum_coverage.csv": 970,
+        "yearly.csv": 12
+      },
+      "state": {
+        "completion.json": {
+          "status": "complete"
+        },
+        "status.json": {
+          "status": "complete"
+        }
+      }
+    },
+    {
+      "experiment": "morning_alpha158_20261013",
+      "table_rows": {
+        "history_only_candidates.csv": 7,
+        "history_only_feature_importance.csv": 161,
+        "history_only_latest_ranking.csv": 299,
+        "history_only_validation_folds.csv": 21,
+        "opening_information_ablation.csv": 2,
+        "with_open_candidates.csv": 7,
+        "with_open_feature_importance.csv": 162,
+        "with_open_latest_ranking.csv": 299,
+        "with_open_validation_folds.csv": 21
+      },
+      "state": {}
+    },
+    {
+      "experiment": "overfit_four_asof_20261013",
+      "table_rows": {
+        "account_metrics_exposure.csv": 2720,
+        "generalization.csv": 600,
+        "paired_block_bootstrap.csv": 96,
+        "paired_strategy_differences.csv": 288,
+        "signal_ic_summary.csv": 780,
+        "strategy_summary.csv": 544
+      },
+      "state": {
+        "completion.json": {
+          "status": "complete"
+        },
+        "status.json": {
+          "status": "complete"
+        }
+      }
+    },
+    {
+      "experiment": "rank80_capital_10k_asof_20251231",
+      "table_rows": {
+        "comparison.csv": 2,
+        "yearly.csv": 8
+      },
+      "state": {
+        "completion.json": {
+          "status": "complete"
+        }
+      }
+    },
+    {
+      "experiment": "rank_buffer_full_exit_asof_20251231",
+      "table_rows": {
+        "comparison.csv": 18,
+        "exit_summary.csv": 96,
+        "trade_summary.csv": 18,
+        "yearly.csv": 72
+      },
+      "state": {
+        "completion.json": {
+          "status": "complete"
+        },
+        "status.json": {
+          "status": "complete",
+          "stage": "all"
+        }
+      }
+    },
+    {
+      "experiment": "rank_buffer_futu_fees_asof_20251231",
+      "table_rows": {
+        "comparison.csv": 6,
+        "yearly.csv": 24
+      },
+      "state": {
+        "completion.json": {
+          "status": "complete"
+        }
+      }
+    },
+    {
+      "experiment": "rank_buffer_top10_top20_asof_20251231",
+      "table_rows": {
+        "comparison.csv": 6,
+        "exit_summary.csv": 48,
+        "stock_contribution.csv": 5045,
+        "trade_summary.csv": 6,
+        "yearly.csv": 24
+      },
+      "state": {
+        "completion.json": {
+          "status": "complete"
+        },
+        "status.json": {
+          "status": "complete",
+          "stage": "all"
+        }
+      }
+    },
+    {
+      "experiment": "rank_cooldown_h9_asof_20251231",
+      "table_rows": {
+        "comparison.csv": 20,
+        "factor_effects.csv": 16,
+        "h9_vs_h10.csv": 8,
+        "ic_comparison.csv": 4,
+        "yearly.csv": 80
+      },
+      "state": {
+        "completion.json": {
+          "status": "complete"
+        },
+        "status.json": {
+          "stage": "complete",
+          "time": 1793170796.7810585
+        }
+      }
+    },
+    {
+      "experiment": "recent_2024_2026_ranking_asof_20261013",
+      "table_rows": {},
+      "state": {}
+    },
+    {
+      "experiment": "recent_30d_20261012",
+      "table_rows": {},
+      "state": {}
+    },
+    {
+      "experiment": "rolling_annual",
+      "table_rows": {
+        "rolling_test_comparison.csv": 4,
+        "rolling_test_yearly.csv": 12
+      },
+      "state": {}
+    },
+    {
+      "experiment": "s6_barra_overlay_asof_20261013",
+      "table_rows": {
+        "comparison.csv": 54,
+        "paired_differences.csv": 30,
+        "risk_tradeoff_summary.csv": 9,
+        "yearly_risk_details.csv": 225
+      },
+      "state": {
+        "completion.json": {
+          "status": "complete"
+        },
+        "status.json": {}
+      }
+    },
+    {
+      "experiment": "s6_futu_fees_asof_20251231",
+      "table_rows": {
+        "comparison.csv": 2,
+        "yearly.csv": 4
+      },
+      "state": {
+        "completion.json": {
+          "status": "complete"
+        }
+      }
+    },
+    {
+      "experiment": "s6_h5_qreg_r1_top10_head4_60_stop13_asof_20261013",
+      "table_rows": {},
+      "state": {
+        "status.json": {}
+      }
+    },
+    {
+      "experiment": "s6_head5_40_asof_20261013",
+      "table_rows": {},
+      "state": {}
+    },
+    {
+      "experiment": "s6_head6_40_2026_holdout_asof_20261013",
+      "table_rows": {
+        "account_period_metrics.csv": 2040,
+        "paired_differences.csv": 1510,
+        "signal_ic_summary.csv": 115,
+        "stock_contributions.csv": 6471,
+        "summary.csv": 408
+      },
+      "state": {
+        "completion.json": {
+          "status": "complete"
+        },
+        "status.json": {
+          "status": "complete"
+        }
+      }
+    },
+    {
+      "experiment": "s6_head6_40_asof_20261013",
+      "table_rows": {},
+      "state": {}
+    },
+    {
+      "experiment": "s6_quarterly_l1l2_small_asof_20261013",
+      "table_rows": {
+        "account_period_metrics.csv": 2300,
+        "paired_vs_quarterly.csv": 530,
+        "stock_contributions_by_phase.csv": 6253,
+        "summary.csv": 460
+      },
+      "state": {
+        "completion.json": {
+          "status": "complete"
+        },
+        "status.json": {
+          "status": "complete"
+        }
+      }
+    },
+    {
+      "experiment": "s6_stop20_asof_20261013",
+      "table_rows": {},
+      "state": {
+        "status.json": {}
+      }
+    },
+    {
+      "experiment": "s6_style_weakness_asof_20261013_forward_20261026",
+      "table_rows": {
+        "daily_regime_labels.csv": 1154,
+        "quarterly_realized_regimes.csv": 100,
+        "regime_by_year.csv": 125,
+        "regime_per_phase.csv": 25,
+        "regime_summary.csv": 5
+      },
+      "state": {
+        "completion.json": {
+          "status": "complete"
+        }
+      }
+    },
+    {
+      "experiment": "s6_top12_head6_40_stop15_asof_20261013",
+      "table_rows": {},
+      "state": {
+        "status.json": {},
+        "scope_superseded.json": {}
+      }
+    },
+    {
+      "experiment": "s6_top12_head6_60_r3_stop15_asof_20261013",
+      "table_rows": {},
+      "state": {
+        "status.json": {}
+      }
+    },
+    {
+      "experiment": "s6_top12_head6_60_stop15_asof_20261013",
+      "table_rows": {},
+      "state": {
+        "status.json": {}
+      }
+    },
+    {
+      "experiment": "staged_close_sell_next_open_buy_2022_2026",
+      "table_rows": {
+        "h10_open_to_open_r10_open_comparison.csv": 12,
+        "h30_open_to_open_r30_open_comparison.csv": 12
+      },
+      "state": {}
+    },
+    {
+      "experiment": "static_2y",
+      "table_rows": {
+        "static_test_comparison.csv": 4,
+        "static_test_yearly.csv": 8,
+        "static_valid_comparison.csv": 4,
+        "static_valid_yearly.csv": 8
+      },
+      "state": {}
+    },
+    {
+      "experiment": "top10_rank65_tp2_sl3_asof_20251231",
+      "table_rows": {
+        "comparison.csv": 4,
+        "exit_summary.csv": 22,
+        "trade_summary.csv": 4,
+        "yearly.csv": 16
+      },
+      "state": {
+        "completion.json": {
+          "status": "complete"
+        }
+      }
+    },
+    {
+      "experiment": "top10_rank80_strong1_2026_asof_20261013",
+      "table_rows": {
+        "comparison.csv": 10
+      },
+      "state": {
+        "completion.json": {
+          "status": "complete"
+        }
+      }
+    },
+    {
+      "experiment": "top10_rank80_strong1_asof_20251231",
+      "table_rows": {
+        "comparison.csv": 10,
+        "exit_summary.csv": 55,
+        "yearly.csv": 40
+      },
+      "state": {
+        "completion.json": {
+          "status": "complete"
+        }
+      }
+    },
+    {
+      "experiment": "top10_rank80_two_thresholds_asof_20261013",
+      "table_rows": {
+        "comparison.csv": 56,
+        "paired_deltas.csv": 180,
+        "yearly.csv": 140
+      },
+      "state": {
+        "completion.json": {
+          "status": "complete"
+        }
+      }
+    },
+    {
+      "experiment": "top20_head5_open_grid_2022_2026_asof_20261013",
+      "table_rows": {
+        "comparison.csv": 182,
+        "comparison_2022_2025.csv": 26,
+        "comparison_2022_2026.csv": 26,
+        "display_comparison_2022_2025.csv": 26,
+        "display_comparison_2022_2026.csv": 26,
+        "display_yearly_returns.csv": 78,
+        "metrics_all_periods.csv": 546,
+        "reference_replay_h5_r5_daily.csv": 1154,
+        "yearly_return_matrix.csv": 78
+      },
+      "state": {}
+    },
+    {
+      "experiment": "top28_continuous_2021_2025",
+      "table_rows": {
+        "ranking.csv": 28,
+        "yearly.csv": 140
+      },
+      "state": {
+        "completion.json": {
+          "status": "complete"
+        }
+      }
+    },
+    {
+      "experiment": "top5_10_20_staged_asof_20251231",
+      "table_rows": {
+        "comparison.csv": 6,
+        "exit_summary.csv": 46,
+        "paired_comparison.csv": 6,
+        "trade_summary.csv": 6,
+        "yearly.csv": 24
+      },
+      "state": {
+        "completion.json": {
+          "status": "complete"
+        }
+      }
+    },
+    {
+      "experiment": "top5_head2_50_full_exit_asof_20251231",
+      "table_rows": {
+        "comparison.csv": 6,
+        "trade_summary.csv": 6,
+        "yearly.csv": 24
+      },
+      "state": {
+        "completion.json": {
+          "status": "complete"
+        }
+      }
+    },
+    {
+      "experiment": "top5_rank_buffer_asof_20251231",
+      "table_rows": {
+        "comparison.csv": 15,
+        "episode_summary.csv": 15,
+        "exit_summary.csv": 57,
+        "stock_contribution.csv": 3110,
+        "yearly.csv": 60,
+        "yearly_stock_contribution.csv": 4996
+      },
+      "state": {
+        "completion.json": {
+          "status": "complete"
+        },
+        "status.json": {
+          "stage": "all",
+          "status": "complete"
+        }
+      }
+    }
+  ],
+  "limitation": "Historical raw artifacts and account ledgers removed by explicit user request; aggregate evidence is not complete reproducibility."
+}
